@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
- import { Role } from 'src/app/core/models/role';
+import { Role } from 'src/app/core/models/role';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,62 +20,49 @@ export class SignInComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
   ngOnInit() {
     this.authForm = this.formBuilder.group({
-      email: ['',[Validators.required, Validators.email, Validators.minLength(5)],],
-      password: [ '',Validators.required],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(5)],],
+      password: ['', Validators.required],
     });
   }
-  get f() {
+  get formValue() {
     return this.authForm.controls;
   }
-  /*adminSet() {
-    this.authForm.get('username').setValue('admin@school.org');
-    this.authForm.get('password').setValue('admin@123');
-  }
- /* teacherSet() {
-    this.authForm.get('username').setValue('teacher@school.org');
-    this.authForm.get('password').setValue('teacher@123');
-  }
-  studentSet() {
-    this.authForm.get('username').setValue('student@school.org');
-    this.authForm.get('password').setValue('student@123');
-  } */
+
   onSubmit() {
     this.submitted = true;
     this.error = '';
+    
     if (this.authForm.invalid) {
-      this.error = 'Username and Password not valid !';
-      return console.log(this.error);
+      return ;
     } else {
       this.authService
-        .login(this.f.email.value, this.f.password.value)
+        .login(this.formValue.email.value, this.formValue.password.value)
         .subscribe(
           (res) => {
             if (res) {
               const role = this.authService.currentUserValue.role;
-              if (role === Role.All || role === Role.Admin) {
+              if (role === Role.ADMIN) {
                 this.router.navigate(['/admin/dashboard/main']);
-              } /*else if (role === Role.Teacher) {
+              } else if (role === Role.POLE_MANAGER) {
                 this.router.navigate(['/teacher/dashboard']);
-              } else if (role === Role.Student) {
+              } else if (role === Role.PROJECT_MANAGER) {
                 this.router.navigate(['/student/dashboard']);
-              }    else {
-                this.router.navigate(['/authentication/signin']);
-              } */
-            }  else {
-              this.error = 'Invalid Login';
+              } else if (role === Role.DEVELOPER) {
+                this.router.navigate(['/student/dashboard']);
+              }
             }
           },
           (error) => {
-            this.error = error;
+            console.log(error["error"]["message"]);
             this.submitted = false;
+            return this.error = error;
           }
         );
-        }
-        
-        console.log(this.f.email.value, this.f.password.value); 
-      } 
+    }
+    console.log(this.formValue.email.value, this.formValue.password.value);
+  }
 
-} 
+}

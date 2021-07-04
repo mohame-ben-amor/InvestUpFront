@@ -23,18 +23,19 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
+  login(login: string, password: string) {
     return this.http
-      .post<any>('http://jemeniso.herokuapp.com/api/login', {
-        email,
+      .post<any>('http://localhost:8080/gestiondestock/v1/auth/authenticate', {
+        login,
         password,
       })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
+          console.log(localStorage.getItem('currentUser'));
+          console.log(user)
           return user;
         })
       );
