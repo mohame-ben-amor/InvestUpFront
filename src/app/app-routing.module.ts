@@ -1,19 +1,50 @@
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { AppComponent } from './app.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
+import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
+import { Page404Component } from './authentication/page404/page404.component';
+import { AuthGuard } from './core/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
-  {path:'sign-up', component: SignUpComponent},
-  {path:'sign-in', component: SignInComponent},
-  {path: 'forgot-password', component:ForgotPasswordComponent},
+  { 
+    path: '',
+    
+    component: MainLayoutComponent,
+    //redirectTo: '/authentication/sign-in', pathMatch: 'full',
+    children: [
+      { path: '', redirectTo: '/authentication/sign-in', pathMatch: 'full' },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+      },
+    ]
+   },
+
+  //{path:'authentication/sign-up',canActivate : [AuthGuard], component: SignUpComponent},
+  //{path:'authentication/sign-in', component: SignInComponent},
+  //{path: 'authentication/forgot-password', component:ForgotPasswordComponent},
+  {
+    path: 'authentication',
+    component: AuthLayoutComponent,
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  {
+    path: 'dashboard',
+    component: AuthLayoutComponent,
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  { path: '**', component: Page404Component },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -34,7 +34,9 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.error = '';
-    
+    this.router.navigate(['/dashboard/main']);
+
+    /*
     if (this.authForm.invalid) {
       return ;
     } else {
@@ -61,7 +63,7 @@ export class SignInComponent implements OnInit {
             return this.error = error;
           }
         );
-    }
+    }*/
     console.log(this.formValue.email.value, this.formValue.password.value);
   }
 
