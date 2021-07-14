@@ -1,18 +1,23 @@
-<mat-nav-list>
+ <!-- Admin's sidebar  -->
+
+ <mat-nav-list>
     <div class="logo py-4">
       <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px"  />
     </div>
     <mat-divider></mat-divider>
     <h2 matSubheader class="mt-2">APPLICATIONS</h2>
   
-    <a mat-list-item style="padding-right: 50%;" routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
-      <mat-icon>home</mat-icon> Home
+    <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
+      <mat-icon>person_add</mat-icon>Add user
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
+      <mat-icon>update</mat-icon>Update user's informations
     </a>
     <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
-      <mat-icon>dashboard</mat-icon> Dashboard
+      <mat-icon>location_city</mat-icon> Add pole
     </a>
-    <a mat-list-item style="padding-right: 50%;"> <mat-icon>edit</mat-icon> Link 3 </a>
-    <a mat-list-item style="padding-right: 50%;"> <mat-icon>edit</mat-icon> Link 4 </a>
-    <a mat-list-item style="padding-right: 50%;"> <mat-icon>edit</mat-icon> Link 5 </a>
-    <a mat-list-item style="padding-right: 50%;"> <mat-icon>edit</mat-icon> Link 6 </a>
+    <a mat-list-item><mat-icon>update</mat-icon> Update pole's informations</a>
+    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; from home</a>
+    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; presential</a>
+    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of all collaborators &nbsp; working at proxym</a>
   </mat-nav-list>

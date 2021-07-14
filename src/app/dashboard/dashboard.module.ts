@@ -4,9 +4,11 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { AdminComponent } from './admin/admin.component';
 @NgModule({
   declarations: [
-    ],
+    AdminComponent,
+  ],
   imports: [
     CommonModule,
     DashboardRoutingModule,

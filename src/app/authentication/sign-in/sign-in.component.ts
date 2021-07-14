@@ -34,7 +34,8 @@ export class SignInComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.error = '';
-    this.router.navigate(['/dashboard/main']);
+
+    this.router.navigate(['/dashboard/admin']);
 
     /*
     if (this.authForm.invalid) {

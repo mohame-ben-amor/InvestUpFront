@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { MainComponent } from './main/main.component';
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'main',
-    pathMatch: 'full',
+    path: '', redirectTo: 'admin', pathMatch: 'full'
+  },
+  {
+    path:'admin',
+    component:AdminComponent,
   },
   {
     path: 'main',

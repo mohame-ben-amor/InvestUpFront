@@ -16,7 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
     Page404Component,
     SignInComponent,
     SignUpComponent,
-   ForgotPasswordComponent
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

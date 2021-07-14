@@ -35,7 +35,8 @@ import { MainComponent } from './dashboard/main/main.component';
     AuthLayoutComponent,
     MainLayoutComponent, 
     HeaderComponent,  
-    SidebarComponent, MainComponent 
+    SidebarComponent, 
+    MainComponent 
   ],
   imports: [
     BrowserModule,
