@@ -1,0 +1,55 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Home</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div class="card">
+        <div class="header">
+          <h2>Users List</h2>
+          <button mat-button [matMenuTriggerFor]="menu" class="header-dropdown">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Action</button>
+            <button mat-menu-item>Another action</button>
+            <button mat-menu-item>Something else here</button>
+          </mat-menu>
+        </div>
+        <div class="tableBody">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>email</th>
+                  <th>Role</th>
+                  <th>edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let usersItem of usersItems">
+                  <td class="table-img">
+                    <img src="{{usersItem.picture}}" alt="">
+                  </td>
+                  <td>{{usersItem.name}}</td>
+                  <td>{{usersItem.phone}}</td>
+                  <td>{{usersItem.address}}</td>
+                  <td>{{usersItem.email}}</td>
+                  <td>{{usersItem.role}}</td>
+                  <td>
+                    <button mat-icon-button class="btn-tbl-edit">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button class="btn-tbl-delete">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

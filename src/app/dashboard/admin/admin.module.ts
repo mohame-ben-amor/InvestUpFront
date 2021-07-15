@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { AdmindRoutingModule } from './admin-routing.module';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { AdminComponent } from './admin/admin.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,11 +17,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
-    AdminComponent,
+    ListUsersComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    AdmindRoutingModule,
     NgxEchartsModule,
     PerfectScrollbarModule,
     NgApexchartsModule,
@@ -35,4 +35,4 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
 })
-export class DashboardModule {}
+export class AdmindModule {}

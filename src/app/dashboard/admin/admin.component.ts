@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as THREE from 'three-full';
+//import * as THREE from 'three-full';
 
 @Component({
   selector: 'app-admin',
