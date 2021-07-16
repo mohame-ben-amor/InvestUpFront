@@ -2,12 +2,14 @@
 
  <mat-nav-list>
     <div class="logo py-4">
+      <a routerLink="admin/welcomepage">
       <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px"  />
+    </a>
     </div>
     <mat-divider></mat-divider>
     <h2 matSubheader class="mt-2">APPLICATIONS</h2>
   
-    <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
+    <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="admin/adduser">
       <mat-icon>person_add</mat-icon>Add user
     </a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
@@ -16,8 +18,8 @@
     <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="/authentication/sign-in">
       <mat-icon>location_city</mat-icon> Add pole
     </a>
-    <a mat-list-item><mat-icon>update</mat-icon> Update pole's informations</a>
+    <a mat-list-item ><mat-icon>update</mat-icon> Update pole's informations</a>
     <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; from home</a>
     <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; presential</a>
-    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of all collaborators &nbsp; working at proxym</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="admin/listusers"><mat-icon>people</mat-icon> &nbsp; List of all collaborators &nbsp; working at proxym</a>
   </mat-nav-list>

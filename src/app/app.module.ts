@@ -29,6 +29,7 @@ import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout
 import { AuthGuard } from './core/auth-guard.service';
 import { AuthService } from './core/auth.service';
 import { MainComponent } from './dashboard/main/main.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,7 @@ import { MainComponent } from './dashboard/main/main.component';
     MainLayoutComponent, 
     HeaderComponent,  
     SidebarComponent, 
-    MainComponent 
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -56,15 +57,8 @@ import { MainComponent } from './dashboard/main/main.component';
     MatDividerModule,
     MatMenuModule,
     MatButtonModule,
-    // NgxEchartsModule.forRoot({
-      // echarts: () => import('echarts'),
-    // }),
     NgApexchartsModule,
     HttpClientModule
-
-    
-    
-
 
   ],
   providers: [AuthGuard,AuthService],

@@ -1,0 +1,105 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Create New User</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div>
+            <div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="form-group">
+                        <mat-label for="firstname">First Name</mat-label>
+                        <input matInput type="text" formControlName="firstname">
+                        <mat-error *ngIf="form.get('firstname').hasError('required')">
+                            Firstname is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('firstname').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('firstname').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label for="firstname">Last Name</mat-label>
+                        <input matInput type="text" formControlName="lastname">
+                        <mat-error *ngIf="form.get('lastname').hasError('required')">
+                            Lastname is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('lastname').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('lastname').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label>Email </mat-label>
+                        <input matInput type="email" placeholder="Put your Email here please " formControlName="email">
+                        <mat-error *ngIf="form.get('email').hasError('required')">
+                            Email is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('email').hasError('pattern')">
+                            Please enter a valid email address
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Password</mat-label>
+                        <input matInput type='password' formControlName="password">
+                        <mat-error *ngIf="form.get('password').hasError('required')">
+                            Password is required
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Copy Password</mat-label>
+                        <input matInput type='password' formControlName="cpassword">
+                        <mat-error *ngIf="form.get('cpassword').hasError('required')">
+                            Copy Password is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('cpassword').value !== form.get('password').value">
+                            Passwords doesn't match
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Phone Number</mat-label>
+                        <input matInput type='text' formControlName="phone">
+                        <mat-error *ngIf="form.get('phone').hasError('required')">
+                            Phone Number is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('phone').hasError('pattern')">
+                            Invalid Phone Number
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label for="role">Role</mat-label>
+                        <select formControlName="role" name="role">
+                            <option *ngFor="let role of roles" [value]="role">{{role}}</option>
+                        </select>
+                        <mat-error *ngIf="form.get('role').hasError('required')">
+                            Please choose an option
+                        </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label for="userStatus">User Status</mat-label>
+                        <select formControlName="userStatus" name="userStatus">
+                            <option *ngFor="let userStatut of userStatusList" [value]="userStatut">{{userStatut}}
+                            </option>
+                        </select>
+                        <mat-error *ngIf="form.get('userStatus').hasError('required')">
+                            Please choose an option
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label for="userStatus">With Holding Status</mat-label>
+                        <select formControlName="withHoldingStatus" name="withHoldingStatus">
+                            <option *ngFor="let withHoldingStatus of withHoldingStatusList" [value]="withHoldingStatus">
+                                {{withHoldingStatus}}</option>
+                        </select>
+                        <mat-error *ngIf="form.get('withHoldingStatus').hasError('required')">
+                            Please choose an option
+                        </mat-error>
+                    </div>
+
+                    <button type="submit" mat-flat-button color="primary" class="auth-form-btn"
+                        [disabled]="!form.valid">Submit</button>
+                    <button type="button" class="btn btn-danger clear-btn" (click)="onClear()">Clear</button>
+                </form>
+            </div>
+        </div>
+    </div>

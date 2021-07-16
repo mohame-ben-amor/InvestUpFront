@@ -1,12 +1,16 @@
 import { Role } from './role';
+import { UserStatus } from './userStatus';
+import { withHoldingStatus } from './withHoldingStatus';
 
 export class User {
   id: number;
-  img: string;
-  username: string;
+  firstname: string;
+  lastname: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  email: string;
   role: Role;
+  phone:string;
+  userStatus:UserStatus;
+  withHoldingStatus:withHoldingStatus;
   token?: string;
 }

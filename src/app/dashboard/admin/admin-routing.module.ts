@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddUserComponent } from './add-user/add-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 const routes: Routes = [
-  {
-    path: '', redirectTo: 'listusers', pathMatch: 'full'
-  },
-  {
-    path:'listusers',
-    component:ListUsersComponent,
-    
-  },
+
+  { path: '', redirectTo: 'welcomepage', pathMatch: 'full'},
+  { path:'welcomepage', component:WelcomePageComponent},
+  { path:'adduser', component:AddUserComponent},
+  { path:'listusers', component:ListUsersComponent},
   
   /**
    * complete your paths!

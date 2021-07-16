@@ -15,9 +15,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import { AddUserComponent } from './add-user/add-user.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { FormsModule ,ReactiveFormsModule}   from '@angular/forms';
+
 @NgModule({
   declarations: [
-    ListUsersComponent
+    ListUsersComponent,
+    AddUserComponent,
+    WelcomePageComponent
   ],
   imports: [
     CommonModule,
@@ -33,6 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDividerModule,
     MatMenuModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 })
 export class AdmindModule {}
