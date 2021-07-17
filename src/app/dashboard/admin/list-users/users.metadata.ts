@@ -1,5 +1,6 @@
 // Sidebar route metadata
 export interface RouteInfo {
+  id:number;
   name: string;
   email: string;
   role: string;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES } from './users-items';
+import { USERSLIST } from './users-items';
 
 @Component({
   selector: 'app-list-users',
@@ -11,7 +11,7 @@ export class ListUsersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.usersItems = ROUTES;
+    this.usersItems = USERSLIST;
   }
 
 }

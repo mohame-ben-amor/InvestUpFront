@@ -18,12 +18,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddUserComponent } from './add-user/add-user.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { FormsModule ,ReactiveFormsModule}   from '@angular/forms';
+import { AddPoleComponent } from './add-pole/add-pole.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
     ListUsersComponent,
     AddUserComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    AddPoleComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

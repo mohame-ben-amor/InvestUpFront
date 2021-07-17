@@ -1,0 +1,77 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Create New Pole</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div>
+            <div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <mat-label for="name"> Name <span class="text-danger" *ngIf="form.get('name').errors && 
+                            form.get('name').hasError('required')">*</span></mat-label>
+
+                        <input matInput type="text" formControlName="name">
+                        <mat-error *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+                            Pole Name is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('name').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('name').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label for="description">Description <span class="text-danger" *ngIf="form.get('description').errors && 
+                            form.get('description').hasError('required')">*</span></mat-label>
+                        <input matInput type="text" formControlName="description">
+                        <mat-error
+                            *ngIf="form.get('description').hasError('required') && form.get('description').touched">
+                            Description is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('description').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('description').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label for="poleManager">Pole Manager <span class="text-danger" *ngIf="form.get('poleManager').errors && 
+                            form.get('poleManager').hasError('required')">*</span></mat-label>
+                        <select formControlName="poleManager" name="poleManager">
+                            <option *ngFor="let poleManager of poleManagers" [value]="poleManager.id">
+                                {{poleManager.firstname}} {{ poleManager.lastname}}
+                            </option>
+                        </select>
+                        <mat-error
+                            *ngIf="form.get('poleManager').hasError('required') && form.get('poleManager').touched">
+                            Please choose an option
+                        </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label>Capacity Places <span class="text-danger" *ngIf="form.get('capacity').errors && 
+                            form.get('capacity').hasError('required')">*</span></mat-label>
+                        <input matInput type='text' formControlName="capacity">
+                        <mat-error *ngIf="form.get('capacity').touched && form.get('capacity').hasError('required')">
+                            Capacity is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('capacity').hasError('pattern')">
+                            Please enter a valid Capacity Number
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Reserved Places <span class="text-danger" *ngIf="form.get('reserved').errors && 
+                            form.get('reserved').hasError('required')">*</span></mat-label>
+                        <input matInput type='text' formControlName="reserved">
+                        <mat-error *ngIf="form.get('reserved').touched && form.get('reserved').hasError('required')">
+                            Reserved is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('reserved').hasError('pattern')">
+                            Please enter a valid Reserved Number
+                        </mat-error>
+                    </div>
+
+                    <button type="submit" mat-flat-button color="primary" class="auth-form-btn"
+                        [disabled]="!form.valid">Submit</button>
+                    <button type="button" class="btn btn-danger clear-btn" (click)="onClear()">Clear</button>
+                </form>
+            </div>
+        </div>
+    </div>

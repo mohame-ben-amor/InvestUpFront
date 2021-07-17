@@ -47,10 +47,6 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  get getFormValues() {
-    return this.form.value;
-  }
-
   onSubmit() {
     console.log(this.form.value);
     this.onClear();

@@ -4,11 +4,12 @@
         <div>
             <div>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
                     <div class="form-group">
-                        <mat-label for="firstname">First Name</mat-label>
+                        <mat-label for="firstname">First Name <span class="text-danger" *ngIf="form.get('firstname').errors && 
+                            form.get('firstname').hasError('required')">*</span></mat-label>
+                        
                         <input matInput type="text" formControlName="firstname">
-                        <mat-error *ngIf="form.get('firstname').hasError('required')">
+                        <mat-error *ngIf="form.get('firstname').hasError('required') && form.get('firstname').touched">
                             Firstname is required
                         </mat-error>
                         <mat-error *ngIf="form.get('firstname').hasError('minlength')">
@@ -17,9 +18,10 @@
                             characters. </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label for="firstname">Last Name</mat-label>
+                        <mat-label for="firstname">Last Name <span class="text-danger" *ngIf="form.get('lastname').errors && 
+                            form.get('lastname').hasError('required')">*</span></mat-label>
                         <input matInput type="text" formControlName="lastname">
-                        <mat-error *ngIf="form.get('lastname').hasError('required')">
+                        <mat-error *ngIf="form.get('lastname').hasError('required') && form.get('lastname').touched">
                             Lastname is required
                         </mat-error>
                         <mat-error *ngIf="form.get('lastname').hasError('minlength')">
@@ -29,9 +31,10 @@
                     </div>
 
                     <div class="form-group">
-                        <mat-label>Email </mat-label>
+                        <mat-label>Email <span class="text-danger" *ngIf="form.get('email').errors && 
+                            form.get('email').hasError('required')">*</span></mat-label>
                         <input matInput type="email" placeholder="Put your Email here please " formControlName="email">
-                        <mat-error *ngIf="form.get('email').hasError('required')">
+                        <mat-error *ngIf="form.get('email').touched && form.get('email').hasError('required')">
                             Email is required
                         </mat-error>
                         <mat-error *ngIf="form.get('email').hasError('pattern')">
@@ -39,16 +42,18 @@
                         </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label>Password</mat-label>
+                        <mat-label>Password <span class="text-danger" *ngIf="form.get('password').errors && 
+                            form.get('password').hasError('required')">*</span></mat-label>
                         <input matInput type='password' formControlName="password">
-                        <mat-error *ngIf="form.get('password').hasError('required')">
+                        <mat-error *ngIf="form.get('password').touched && form.get('password').hasError('required') ">
                             Password is required
                         </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label>Copy Password</mat-label>
+                        <mat-label>Copy Password <span class="text-danger" *ngIf="form.get('cpassword').errors && 
+                            form.get('cpassword').hasError('required')">*</span></mat-label>
                         <input matInput type='password' formControlName="cpassword">
-                        <mat-error *ngIf="form.get('cpassword').hasError('required')">
+                        <mat-error *ngIf="form.get('cpassword').touched && form.get('cpassword').hasError('required') ">
                             Copy Password is required
                         </mat-error>
                         <mat-error *ngIf="form.get('cpassword').value !== form.get('password').value">
@@ -56,42 +61,46 @@
                         </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label>Phone Number</mat-label>
+                        <mat-label>Phone Number <span class="text-danger" *ngIf="form.get('phone').errors && 
+                            form.get('phone').hasError('required')">*</span></mat-label>
                         <input matInput type='text' formControlName="phone">
-                        <mat-error *ngIf="form.get('phone').hasError('required')">
+                        <mat-error *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">
                             Phone Number is required
                         </mat-error>
                         <mat-error *ngIf="form.get('phone').hasError('pattern')">
-                            Invalid Phone Number
+                            Please enter a valid Phone Number
                         </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label for="role">Role</mat-label>
+                        <mat-label for="role">Role <span class="text-danger" *ngIf="form.get('role').errors && 
+                            form.get('role').hasError('required')">*</span></mat-label>
                         <select formControlName="role" name="role">
                             <option *ngFor="let role of roles" [value]="role">{{role}}</option>
                         </select>
-                        <mat-error *ngIf="form.get('role').hasError('required')">
+                        <mat-error *ngIf="form.get('role').hasError('required') && form.get('role').touched">
                             Please choose an option
                         </mat-error>
                     </div>
 
                     <div class="form-group">
-                        <mat-label for="userStatus">User Status</mat-label>
+                        <mat-label for="userStatus">User Status <span class="text-danger" *ngIf="form.get('userStatus').errors && 
+                            form.get('userStatus').hasError('required')">*</span></mat-label>
                         <select formControlName="userStatus" name="userStatus">
                             <option *ngFor="let userStatut of userStatusList" [value]="userStatut">{{userStatut}}
                             </option>
                         </select>
-                        <mat-error *ngIf="form.get('userStatus').hasError('required')">
+                        <mat-error *ngIf="form.get('userStatus').hasError('required') && form.get('userStatus').touched">
                             Please choose an option
                         </mat-error>
                     </div>
                     <div class="form-group">
-                        <mat-label for="userStatus">With Holding Status</mat-label>
+                        <mat-label for="userStatus">With Holding Status <span class="text-danger" *ngIf="form.get('withHoldingStatus').errors && 
+                            form.get('withHoldingStatus').hasError('required')">*</span></mat-label>
                         <select formControlName="withHoldingStatus" name="withHoldingStatus">
                             <option *ngFor="let withHoldingStatus of withHoldingStatusList" [value]="withHoldingStatus">
                                 {{withHoldingStatus}}</option>
                         </select>
-                        <mat-error *ngIf="form.get('withHoldingStatus').hasError('required')">
+                        <mat-error *ngIf="form.get('withHoldingStatus').hasError('required') && form.get('withHoldingStatus').touched">
                             Please choose an option
                         </mat-error>
                     </div>
