@@ -1,17 +1,17 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
-import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './shared-layout/app-layout/main-layout/main-layout.component';
+import { AuthLayoutComponent } from './shared-layout/app-layout/auth-layout/auth-layout.component';
 import { Page404Component } from './authentication/page404/page404.component';
 import { AuthGuard } from './core/auth-guard.service';
 
 const routes: Routes = [
-  { 
+  {
     path: '', component: MainLayoutComponent,
     //redirectTo: '/authentication/sign-in', pathMatch: 'full',
     children: [
       { path: '', redirectTo: '/authentication/sign-in', pathMatch: 'full' },
-      
+
     ]
    },
     //{path:'authentication/sign-up',canActivate : [AuthGuard], component: SignUpComponent},

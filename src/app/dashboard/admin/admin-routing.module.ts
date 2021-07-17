@@ -4,7 +4,7 @@ import { AddPoleComponent } from './add-pole/add-pole.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
-import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { WelcomePageComponent } from '../../shared-layout/welcome-page/welcome-page.component';
 const routes: Routes = [
 
   { path: '', redirectTo: 'welcomepage', pathMatch: 'full' },
