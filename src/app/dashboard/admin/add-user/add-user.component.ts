@@ -47,7 +47,9 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit() {     
+    // b role bch naaml el redirection l aneho API bch nestaamlo besh n'ajouti el user khater 
+    // kol create user API wahdo selon e role!
     console.log(this.form.value);
     this.onClear();
   }
