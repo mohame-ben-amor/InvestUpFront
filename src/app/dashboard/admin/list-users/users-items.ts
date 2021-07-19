@@ -1,46 +1,56 @@
 import { Role } from 'src/app/core/models/role';
-import { RouteInfo } from './users.metadata';
+import { User } from 'src/app/core/models/user';
+import { UserStatus } from 'src/app/core/models/userStatus';
+import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
 
-export const USERSLIST: RouteInfo[] = [
+export const USERSLIST: User[] = [
 
   {
     id: 1,
-    name: 'mohamed',
+    firstname: 'mohamed',
+    lastname: "cheni",
     email: 'mohamed@gmail.com',
     role: Role.ADMIN,
     address: 'ksibet',
     phone: '0123467',
-    picture: 'assets/images/user/user8.jpg',
+    userStatus: UserStatus.REMOTE,
+    withHoldingStatus: WithHoldingStatus.NONE,
   },
 
   {
     id: 2,
-    name: 'ayoub',
+    firstname: 'ayoub',
+    lastname: "cheni",
     email: 'ayoub@gmail.com',
     role: Role.POLE_MANAGER,
     address: 'ksibet',
     phone: '0123467',
-    picture: 'assets/images/user/user8.jpg',
+    userStatus: UserStatus.PRESENTIAL,
+    withHoldingStatus: WithHoldingStatus.SICK_DAYS,
   },
 
   {
     id: 3,
-    name: 'rayen cherni',
+    firstname: 'rayen',
+    lastname: "cheni",
     email: 'rayen@gmail.com',
     role: Role.DEVELOPER,
     address: 'ksibet',
     phone: '0123467',
-    picture: 'assets/images/user/user8.jpg',
+    userStatus: UserStatus.PRESENTIAL,
+    withHoldingStatus: WithHoldingStatus.SUSPENSION,
   },
 
   {
     id: 4,
-    name: 'hamdi malek',
+    firstname: 'hamdi',
+    lastname: "cheni",
     email: 'hamdimalek@gmail.com',
     role: Role.PROJECT_MANAGER,
     address: 'ksibet',
     phone: '0123467',
-    picture: 'assets/images/user/user8.jpg',
+    userStatus: UserStatus.REMOTE,
+    withHoldingStatus: WithHoldingStatus.IN_VACATION,
   },
 
 ];

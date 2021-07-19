@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { USERSLIST } from './users-items';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-list-users',
@@ -7,11 +10,27 @@ import { USERSLIST } from './users-items';
   styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
+
+  constructor(private modalService: NgbModal) {
+  }
+
   public usersItems: any[];
-  constructor() { }
+
+  roles = ['Admin', 'Project Manager', 'Pole Manager', 'Developer'];
+  withHoldingStatusList = ["None", "In vacation", "Sick days", "Suspension"];
+
 
   ngOnInit(): void {
     this.usersItems = USERSLIST;
+
   }
+
+
+
+  
+
+ 
+
+
 
 }

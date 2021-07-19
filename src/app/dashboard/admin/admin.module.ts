@@ -16,9 +16,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { AddUserComponent } from './add-user/add-user.component';
 import { WelcomePageComponent } from '../../shared-layout/welcome-page/welcome-page.component';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPoleComponent } from './add-pole/add-pole.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListPolesComponent } from './list-poles/list-poles.component';
+import { AllPoleManagersComponent } from './all-pole-managers/all-pole-managers.component';
+import { AllProjectManagersComponent } from './all-project-managers/all-project-managers.component';
+import * as Material from "@angular/material";
+import { PopUpComponent } from './all-project-managers/pop-up/pop-up.component';
+import { PopUpPoleManagersComponent } from './all-pole-managers/pop-up-pole-managers/pop-up-pole-managers.component';
+import { PopUpPolesComponent } from './list-poles/pop-up-poles/pop-up-poles.component';
+import { ListDevelopersComponent } from './list-developers/list-developers.component';
+import { PopUpDevelopersComponent } from './list-developers/pop-up-developers/pop-up-developers.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +36,14 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     AddUserComponent,
     WelcomePageComponent,
     AddPoleComponent,
-    EditUserComponent
+    ListPolesComponent,
+    AllPoleManagersComponent,
+    AllProjectManagersComponent,
+    PopUpComponent,
+    PopUpPoleManagersComponent,
+    PopUpPolesComponent,
+    ListDevelopersComponent,
+    PopUpDevelopersComponent,
   ],
   imports: [
     CommonModule,
@@ -40,10 +57,15 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     MatListModule,
     MatToolbarModule,
     MatDividerModule,
-    MatMenuModule,
     MatButtonModule,
+    MatMenuModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule,
+    Material.MatDialogModule
   ],
+  exports: [Material.MatDialogModule
+  ],
+  entryComponents:[PopUpComponent,PopUpPoleManagersComponent,PopUpPolesComponent,PopUpDevelopersComponent]
 })
-export class AdmindModule {}
+export class AdmindModule { }

@@ -1,25 +1,39 @@
- <!-- Admin's sidebar  -->
-
- <mat-nav-list>
-    <div class="logo py-4">
-      <a routerLink="admin/welcomepage">
-      <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px"  />
+<mat-nav-list>
+  <div class="logo py-4">
+    <a routerLink="admin/welcomepage">
+      <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px" />
     </a>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="user-panel">
+    <div class=" image">
+      <img src="userImg" class="profile_image" alt="User Image" />
     </div>
-    <mat-divider></mat-divider>
-    <h2 matSubheader class="mt-2">APPLICATIONS</h2>
-  
-    <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="admin/adduser">
-      <mat-icon>person_add</mat-icon>Add user
+  </div>
+  <h2 class="user-name">User Name</h2>
+  <div class="sidebarr">
+    <a [routerLinkActive]="['router-link-active']"
+      routerLink="admin/adduser">
+      <i class="material-icons">person_add</i><span>Add user</span>
     </a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="admin/edituser">
-      <mat-icon>update</mat-icon>Update user's informations
+
+    <a [routerLinkActive]="['router-link-active']"routerLink="admin/addpole">
+      <i class="material-icons">location_city</i> <span>Add pole</span>
     </a>
-    <a mat-list-item style="padding-right: 40%;" routerLinkActive="list-item-active" routerLink="admin/addpole">
-      <mat-icon>location_city</mat-icon> Add pole
+
+    <a [routerLinkActive]="['list-item-active']" routerLink="admin/allpoles">
+      <i class="material-icons">people</i><span>All poles</span>
     </a>
-    <a mat-list-item ><mat-icon>update</mat-icon> Update pole's informations</a>
-    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; from home</a>
-    <a mat-list-item><mat-icon>people</mat-icon> &nbsp; List of collaborators working &nbsp; presential</a>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="admin/listusers"><mat-icon>people</mat-icon> &nbsp; List of all collaborators &nbsp; working at proxym</a>
-  </mat-nav-list>
+    <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpolemanagers"><i class="material-icons">people</i> <span>All pole managers</span></a>
+    <a [routerLinkActive]="['router-link-active']"routerLink="admin/allprojectmanagers"><i class="material-icons">people</i> <span>All project managers</span></a>
+    <a [routerLinkActive]="['router-link-active']" routerLink="admin/alldevelopers"><i class="material-icons">people</i> <span>All developers</span></a>
+    <a [routerLinkActive]="['router-link-active']" routerLink="admin/allusers"><i class="material-icons">people</i> <span>All collaborators</span></a>
+
+    <!--  <a><i class="material-icons">people</i> <span>Collaborators working :</span></a>
+
+    <a href="#" class="submenu"> <span>Home</span></a>
+    <a href="#" class="submenu"><span>Presential</span></a>
+    -->
+  </div>
+
+</mat-nav-list>

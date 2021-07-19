@@ -1,9 +1,8 @@
 
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { AuthService } from 'src/app/core/service/auth.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { RightSidebarService } from 'src/app/core/service/rightsidebar.service';
-import { Role } from 'src/app/core/models/role';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 const document: any = window.document;
 
 @Component({
@@ -14,11 +13,50 @@ const document: any = window.document;
 export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) {}
+  editForm: FormGroup;
+  closeResult: string;
 
-  ngOnInit(): void {}
+  constructor(private router: Router,
+    private modalService: NgbModal) { }
+
+  ngOnInit(): void {
+    this.initForm();
+  }
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
+  }
+
+  private initForm() {
+    this.editForm = new FormGroup({
+      'password': new FormControl("", Validators.required),
+      'npassword': new FormControl("", Validators.required),
+    });
+  }
+
+  //Edit form methods 
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.onSubmit();
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult);
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  onSubmit() {
+    console.log(this.editForm.value)
+    this.editForm.reset();
   }
 }

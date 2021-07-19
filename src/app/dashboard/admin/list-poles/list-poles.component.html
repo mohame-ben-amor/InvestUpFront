@@ -1,5 +1,5 @@
 <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Edit a User Profile Page </div>
+    <div class="d-flex page__box p-3 mt-2">Poles List</div>
     <div class="page__content shadow p-3 position-relative">
       <div class="card">
         <div class="header">
@@ -17,31 +17,30 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>Name</th>
-                  <th>Phone</th>
-                  <th>Address</th>
-                  <th>email</th>
-                  <th>Role</th>
+                  <th>Descrption</th>
+                  <th>Capacity</th>
+                  <th>Reserved</th>
+                  <th>Pole Manager</th>
                   <th>edit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let userItem of usersItems">
-                  <td class="table-img">
-                    <img src="{{userItem.picture}}" alt="">
-                  </td>
-                  <td>{{userItem.name}}</td>
-                  <td>{{userItem.phone}}</td>
-                  <td>{{userItem.address}}</td>
-                  <td>{{userItem.email}}</td>
-                  <td>{{userItem.role}}</td>
+                <tr *ngFor="let pole of poles">
                   <td>
-                    <button mat-icon-button class="btn-tbl-edit" (click)="onEdit(+userItem.id,userItem.role)">
+                    {{pole.name}}
+                  </td>
+                  <td>{{pole.description}}</td>
+                  <td>{{pole.capacity}}</td>
+                  <td>{{pole.reserved}}</td>
+                  <td>{{pole.poleManagerName}}</td>
+                  <td>
+                    <!---->
+                    <button class="btn btn-outline-info" id="edit-button-style" (click)="onEdit(pole.id)">
                       <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button class="btn-tbl-delete">
-                      <mat-icon>delete</mat-icon>
+                    <button type="button" class="btn btn-outline-danger" id="delete-button-style" (click)="onDelete(pole.id,pole.name)">
+                      <mat-icon>delete_forever</mat-icon>
                     </button>
                   </td>
                 </tr>
@@ -49,6 +48,9 @@
             </table>
           </div>
         </div>
+  
       </div>
     </div>
-</div>
+  </div>
+
+  

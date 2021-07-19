@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/core/models/user';
+
 //Note : fait l'inseration de tous les services dans le app module !! cause : video 20 et 21 dans le dossier 16 de maxi  
 @Component({
   selector: 'app-add-user',
@@ -22,32 +23,31 @@ export class AddUserComponent implements OnInit {
     this.initForm();
   }
   private initForm() {
-    let user = new User();
     let cpassword: "";
 
     this.form = new FormGroup({
-      'firstname': new FormControl(user.firstname, [
+      'firstname': new FormControl("", [
         Validators.required,
         Validators.minLength(2)]),
-      'lastname': new FormControl(user.lastname, [
+      'lastname': new FormControl("", [
         Validators.required,
         Validators.minLength(2)]),
 
-      'email': new FormControl(user.email, [
+      'email': new FormControl("", [
         Validators.required,
         Validators.pattern(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)]),
-      'password': new FormControl(user.password, [Validators.required]),
-      'cpassword': new FormControl(cpassword, [Validators.required]),
-      'phone': new FormControl(user.phone, [Validators.required,
+      'password': new FormControl("", [Validators.required]),
+      'cpassword': new FormControl("", [Validators.required]),
+      'phone': new FormControl("", [Validators.required,
       Validators.pattern("^[0-9]*$")]),
-      'role': new FormControl(user.role, Validators.required),
-      'userStatus': new FormControl(user.userStatus, [Validators.required]),
-      'withHoldingStatus': new FormControl(user.withHoldingStatus, [Validators.required]),
+      'role': new FormControl("", Validators.required),
+      'userStatus': new FormControl("", [Validators.required]),
+      'withHoldingStatus': new FormControl("", [Validators.required]),
 
     });
   }
 
-  onSubmit() {     
+  onSubmit() {
     // b role bch naaml el redirection l aneho API bch nestaamlo besh n'ajouti el user khater 
     // kol create user API wahdo selon e role!
     console.log(this.form.value);

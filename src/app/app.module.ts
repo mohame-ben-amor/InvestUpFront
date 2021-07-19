@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Component,NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { MainLayoutComponent } from './shared-layout/app-layout/main-layout/main
 import { AuthGuard } from './core/auth-guard.service';
 import { AuthService } from './core/auth.service';
 import { MainComponent } from './dashboard/main/main.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MainComponent } from './dashboard/main/main.component';
     MainLayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    MainComponent
+    MainComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -58,10 +60,16 @@ import { MainComponent } from './dashboard/main/main.component';
     MatMenuModule,
     MatButtonModule,
     NgApexchartsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    NgbModule,
+    MatListModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthGuard,AuthService],
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pole } from 'src/app/core/models/pole';
 import { PoleManager } from 'src/app/core/models/poleManager';
+import { UserStatus } from 'src/app/core/models/userStatus';
 
 @Component({
   selector: 'app-add-pole',
@@ -11,29 +13,27 @@ import { PoleManager } from 'src/app/core/models/poleManager';
 export class AddPoleComponent implements OnInit {
 
   form: FormGroup;
-  poleManagers: PoleManager[] = [
-    new PoleManager(1, "RAYEN", "CHERNI"),new PoleManager(2, "MOHAMMED", "BEN AMOR")
-  ]
+  poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
+  new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.initForm();
   }
   private initForm() {
-    let pole = new Pole();
 
     this.form = new FormGroup({
-      'name': new FormControl(pole.name, [
+      'name': new FormControl("", [
         Validators.required,
         Validators.minLength(2)]),
-      'description': new FormControl(pole.Description, [
+      'description': new FormControl("", [
         Validators.required,
         Validators.minLength(10)]),
-      'poleManager': new FormControl(pole.PoleManagerName, [Validators.required]),
-      'capacity': new FormControl(pole.capacity, [Validators.required,
+      'poleManager': new FormControl("", [Validators.required]),
+      'capacity': new FormControl("", [Validators.required,
       Validators.pattern("^[0-9]*$")]),
-      'reserved': new FormControl(pole.reserved, [Validators.required,
+      'reserved': new FormControl("", [Validators.required,
       Validators.pattern("^[0-9]*$")]),
     });
   }
