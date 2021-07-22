@@ -1,0 +1,35 @@
+<mat-nav-list>
+    <div class="logo py-4">
+        <a routerLink="projectmanager/welcomepage">
+            <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px" />
+        </a>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="user-panel">
+        <div class=" image">
+            <img src="userImg" class="profile_image" alt="User Image" />
+        </div>
+    </div>
+    <h2 class="user-name">User Name</h2>
+    <div class="sidebarr">
+        <a [routerLinkActive]="['router-link-active']" routerLink="projectmanager/planification">
+            <i class="material-icons">person_add</i><span>Create planification</span>
+        </a>
+
+        <a [routerLinkActive]="['router-link-active']" routerLink="projectmanager/myteams">
+            <i class="material-icons">location_city</i> <span>My projects </span>
+        </a>
+
+        <a [routerLinkActive]="['list-item-active']" routerLink="projectmanager/allpoles">
+            <i class="material-icons">people</i><span>All poles</span>
+        </a>
+        <a [routerLinkActive]="['router-link-active']" routerLink="projectmanager/allpolemanagers"><i
+                class="material-icons">people</i> <span>All pole managers</span></a>
+        <a [routerLinkActive]="['router-link-active']" routerLink="projectmanager/allprojectmanagers"><i
+                class="material-icons">people</i> <span>All project managers</span></a>
+        <a [routerLinkActive]="['router-link-active']" routerLink="projectmanager/alldevelopers"><i
+                class="material-icons">people</i> <span>All developers</span></a>
+
+    </div>
+
+</mat-nav-list>

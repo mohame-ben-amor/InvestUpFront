@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { USERSLIST } from './users-items';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/core/models/user';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list-users',

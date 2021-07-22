@@ -30,7 +30,6 @@ export class PopUpPolesComponent implements OnInit {
   }
 
   private initForm() {
-
     this.editForm = new FormGroup({
       'poleManager': new FormControl("", Validators.required),
     });

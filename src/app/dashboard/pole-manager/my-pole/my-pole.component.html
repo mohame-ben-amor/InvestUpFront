@@ -1,5 +1,5 @@
 <div class="container-fluid page">
-    <div class="d-flex page__box p-3 mt-2">Developers List</div>
+    <div class="d-flex page__box p-3 mt-2">My Pole</div>
     <div class="page__content shadow p-3 position-relative">
         <div class="card">
             <div class="header">
@@ -18,32 +18,26 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th>Address</th>
-                                <th>Latest Projects</th>
-                                <th>Work Status</th>
+                                <th>Descrption</th>
+                                <th>Capacity</th>
+                                <th>Reserved</th>
+                                <th>Pole Manager</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let developer of developers">
+                            <tr *ngFor="let pole of poles">
                                 <td>
-                                    {{developer.firstname}} {{developer.lastname}}
+                                    {{pole.name}}
                                 </td>
-                                <td>{{developer.phone}}</td>
-                                <td>{{developer.email}}</td>
-                                <td>{{developer.address}}</td>
-                                <td>{{developer.projects}}</td>
-                                <td>{{developer.userStatus}}</td>
+                                <td>{{pole.description}}</td>
+                                <td>{{pole.capacity}}</td>
+                                <td>{{pole.reserved}}</td>
+                                <td>{{pole.poleManagerName}}</td>
                                 <td>
                                     <button type="button" class="btn btn-outline-info" id="edit-button-style"
-                                        (click)="onEdit(developer.id)">
+                                    (click)="onEdit(pole.id)">
                                         <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button type="button" class="btn btn-outline-danger" id="delete-button-style"
-                                        (click)="onDelete(developer.id,developer.firstname,developer.lastname)">
-                                        <mat-icon>delete_forever</mat-icon>
                                     </button>
                                 </td>
                             </tr>

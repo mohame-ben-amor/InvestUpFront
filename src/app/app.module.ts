@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,6 @@ import { SidebarComponent } from './shared-layout/sidebar/sidebar.component';
 import { HeaderComponent } from './shared-layout/header/header.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -30,6 +29,9 @@ import { AuthGuard } from './core/auth-guard.service';
 import { AuthService } from './core/auth.service';
 import { MainComponent } from './dashboard/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProjectManagerSidebarComponent } from './shared-layout/project-manager-sidebar/project-manager-sidebar.component';
+import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sidebar/pole-manager-sidebar.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     SidebarComponent,
     MainComponent,
-
+    ProjectManagerSidebarComponent,
+    PoleManagerSidebarComponent,
   ],
   imports: [
     BrowserModule,

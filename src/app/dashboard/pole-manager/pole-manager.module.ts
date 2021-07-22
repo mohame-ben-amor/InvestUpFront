@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { DashboardRoutingModule } from './dashboard-routing.module';
+import { PoleManagerRoutingModule } from './pole-manager-routing.module';
+
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { AdminComponent } from './admin/admin.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -14,17 +14,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { ProjectManagerComponent } from './project-manager/project-manager.component';
-import { PoleManagerComponent } from './pole-manager/pole-manager.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import * as Material from "@angular/material";
+import { PlanificationComponent } from './planification/planification.component';
+import { PopUpPlanificationComponent } from './planification/pop-up-planification/pop-up-planification.component';
+import { MyPoleComponent } from './my-pole/my-pole.component';
+import { PopUpEditPoleComponent } from './my-pole/pop-up-edit-pole/pop-up-edit-pole.component';
+
+
 @NgModule({
   declarations: [
-    AdminComponent,
-    ProjectManagerComponent,
-    PoleManagerComponent,
+    PlanificationComponent,
+    PopUpPlanificationComponent,
+    MyPoleComponent,
+    PopUpEditPoleComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule,
+    PoleManagerRoutingModule,
     NgxEchartsModule,
     PerfectScrollbarModule,
     NgApexchartsModule,
@@ -34,8 +42,15 @@ import { PoleManagerComponent } from './pole-manager/pole-manager.component';
     MatListModule,
     MatToolbarModule,
     MatDividerModule,
-    MatMenuModule,
     MatButtonModule,
+    MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    Material.MatDialogModule
   ],
+  exports: [Material.MatDialogModule
+  ],
+  entryComponents:[PopUpPlanificationComponent,PopUpEditPoleComponent]
 })
-export class DashboardModule {}
+export class PoleManagerdModule { }

@@ -1,0 +1,67 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" class="title">Pole profile update</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <mat-label for="name"> Name <span class="text-danger" *ngIf="form.get('name').errors && 
+                    form.get('name').hasError('required')">*</span></mat-label>
+
+                <input matInput type="text" formControlName="name">
+                <mat-error *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+                    Pole Name is required
+                </mat-error>
+                <mat-error *ngIf="form.get('name').hasError('minlength')">
+                    The minimum length for this field is
+                    {{form.get('name').errors.minlength.requiredLength}}
+                    characters. </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-label for="description">Description <span class="text-danger" *ngIf="form.get('description').errors && 
+                    form.get('description').hasError('required')">*</span></mat-label>
+                <input matInput type="text" formControlName="description">
+                <mat-error *ngIf="form.get('description').hasError('required') && form.get('description').touched">
+                    Description is required
+                </mat-error>
+                <mat-error *ngIf="form.get('description').hasError('minlength')">
+                    The minimum length for this field is
+                    {{form.get('description').errors.minlength.requiredLength}}
+                    characters. </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-label>Capacity Places <span class="text-danger" *ngIf="form.get('capacity').errors && 
+                    form.get('capacity').hasError('required')">*</span></mat-label>
+                <input matInput type='text' formControlName="capacity">
+                <mat-error *ngIf="form.get('capacity').touched && form.get('capacity').hasError('required')">
+                    Capacity is required
+                </mat-error>
+                <mat-error *ngIf="form.get('capacity').hasError('pattern')">
+                    Please enter a valid Capacity Number
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-label>Reserved Places <span class="text-danger" *ngIf="form.get('reserved').errors && 
+                    form.get('reserved').hasError('required')">*</span></mat-label>
+                <input matInput type='text' formControlName="reserved">
+                <mat-error *ngIf="form.get('reserved').touched && form.get('reserved').hasError('required')">
+                    Reserved is required
+                </mat-error>
+                <mat-error *ngIf="form.get('reserved').hasError('pattern')">
+                    Please enter a valid Reserved Number
+                </mat-error>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-outline-success"
+            (click)="onSubmit()">Save</button>
+    </div>
+</div>

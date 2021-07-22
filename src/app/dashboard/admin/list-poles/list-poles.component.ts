@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Pole } from 'src/app/core/models/pole';
-import { PoleManager } from 'src/app/core/models/poleManager';
-import { UserStatus } from 'src/app/core/models/userStatus';
 import { PopUpPolesComponent } from './pop-up-poles/pop-up-poles.component';
 
 @Component({
@@ -31,6 +28,7 @@ export class ListPolesComponent implements OnInit {
     dialogConfig.width = '40%';
     this.dialog.open(PopUpPolesComponent, dialogConfig);
   }
+
   onEdit(id: number) {
     console.log("id pole from edit button: " + id);
     this.idPole = id.toString();
@@ -41,8 +39,8 @@ export class ListPolesComponent implements OnInit {
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
     this.onCreate();
   }
-  onDelete(id: number, poleName: string) {
 
+  onDelete(id: number, poleName: string) {
     console.log("id project manager from edit button: " + id);
     this.idPole = id.toString();
     this.displayEditPopUp = 'false';
@@ -52,6 +50,5 @@ export class ListPolesComponent implements OnInit {
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
     localStorage.setItem('poleName', poleName);
     this.onCreate();
-
   }
 }

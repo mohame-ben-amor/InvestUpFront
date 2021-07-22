@@ -1,0 +1,33 @@
+<!-- Edit Pop up-->
+<div *ngIf="displayEditPopUp=='true'">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" class="title">Pole Manager Decision</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="onCancel()">
+
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <mat-label for="userStatus">Decision <span class="text-danger" *ngIf="editForm.get('dicisionMessage').errors && 
+                    editForm.get('dicisionMessage').hasError('required')">*</span></mat-label>
+                <select formControlName="dicisionMessage" name="decision">
+                    <option *ngFor="let decision of decision" [value]="decision">{{decision}}
+                    </option>
+                </select>
+                <mat-error *ngIf="editForm.get('dicisionMessage').hasError('required') && editForm.get('dicisionMessage').touched">
+                    Please choose an option
+                </mat-error>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+        <button type="submit" [disabled]="!editForm.valid" class="btn btn-outline-success"
+            (click)="onSubmit()">Save</button>
+    </div>
+</div> 

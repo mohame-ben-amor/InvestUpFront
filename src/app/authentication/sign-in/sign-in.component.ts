@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { Role } from 'src/app/core/models/role';
 
 @Component({
   selector: 'app-sign-in',
@@ -35,7 +34,10 @@ export class SignInComponent implements OnInit {
     this.submitted = true;
     this.error = '';
 
-    this.router.navigate(['/dashboard/admin']);
+    //this.router.navigate(['/dashboard/admin']);
+    //this.router.navigate(['/dashboard/projectmanager']);
+    this.router.navigate(['/dashboard/polemanager']);
+
 
     /*
     if (this.authForm.invalid) {

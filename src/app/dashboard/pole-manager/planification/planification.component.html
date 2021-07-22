@@ -1,0 +1,54 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2">History</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="card">
+      <div class="header">
+        <button mat-button [matMenuTriggerFor]="menu" class="header-dropdown">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Action</button>
+          <button mat-menu-item>Another action</button>
+          <button mat-menu-item>Something else here</button>
+        </mat-menu>
+      </div>
+      <div class="tableBody">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Developer Name</th>
+                <th>Starting date</th>
+                <th>Deadline</th>
+                <th>Project Manager Decision</th>
+                <th>Pole Manager Decision</th>
+                <th>Edit Your Decision</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let history of histories">
+                <td>
+                  {{history.developerName}}
+                </td>
+                <td>{{history.startingDate}}</td>
+                <td>{{history.deadline}}</td>
+                <td>{{history.projectManagerDecision}}</td>
+                <td>{{history.poleManagerDecision}}</td>
+                <td>
+                  <button type="button" class="btn btn-outline-info" id="edit-button-style"
+                    (click)="onEdit(history.id)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+-->

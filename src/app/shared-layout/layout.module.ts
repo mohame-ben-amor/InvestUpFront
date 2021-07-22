@@ -13,9 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
-  declarations: [
-    
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     NgbModule,
@@ -29,7 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
     ],
   
 })

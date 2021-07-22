@@ -1,0 +1,72 @@
+<!-- Crete Pop up-->
+<div *ngIf="displayCreatePopUp=='true'">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" class="title">With holding status update</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <mat-label for="name"> Name <span class="text-danger" *ngIf="createForm.get('name').errors && 
+                    createForm.get('name').hasError('required')">*</span></mat-label>
+
+                <input matInput type="text" formControlName="name">
+                <mat-error *ngIf="createForm.get('name').hasError('required') && createForm.get('name').touched">
+                    Project Name is required
+                </mat-error>
+                <mat-error *ngIf="createForm.get('name').hasError('minlength')">
+                    The minimum length for this field is
+                    {{createForm.get('name').errors.minlength.requiredLength}}
+                    characters. </mat-error>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+        <button type="submit" [disabled]="!createForm.valid" class="btn btn-outline-success"
+            (click)="onSubmit()">Save</button>
+    </div>
+</div>
+
+<!--Delete pop up-->
+<div *ngIf="displayDeletePopUp=='true'">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Project deletion</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>Are you sure you want to delete a pole?</strong></p>
+        <p>All information associated to this project profile will be permanently deleted.
+            <span class="text-danger">This operation can not be undone.</span>
+        </p>
+        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+
+
+            <div class="form-group">
+                <mat-label for="name">Project Name <span class="text-danger" *ngIf="createForm.get('name').errors && 
+                    createForm.get('name').hasError('required')">*</span></mat-label>
+                <select formControlName="name" name="name">
+                    <option *ngFor="let project of projects" [value]="project.id">{{project.name}} </option>
+                </select>
+                <mat-error *ngIf="createForm.get('name').hasError('required') && createForm.get('name').touched">
+                    Please choose an option
+                </mat-error>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
+        <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Ok</button>
+    </div>
+</div>
