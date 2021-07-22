@@ -1,7 +1,9 @@
 import { Role } from 'src/app/core/models/role';
+import { RoleEnum } from 'src/app/core/models/roleEnum';
 import { User } from 'src/app/core/models/user';
 import { UserStatus } from 'src/app/core/models/userStatus';
 import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
+
 
 export const USERSLIST: User[] = [
 
@@ -10,7 +12,10 @@ export const USERSLIST: User[] = [
     firstname: 'mohamed',
     lastname: "cheni",
     email: 'mohamed@gmail.com',
-    role: Role.ADMIN,
+    role: {
+      id: 1,
+      roleName: RoleEnum.ADMIN
+    },
     address: 'ksibet',
     phone: '0123467',
     userStatus: UserStatus.REMOTE,
@@ -22,7 +27,10 @@ export const USERSLIST: User[] = [
     firstname: 'ayoub',
     lastname: "cheni",
     email: 'ayoub@gmail.com',
-    role: Role.POLE_MANAGER,
+    role: {
+      id: 2,
+      roleName: RoleEnum.DEVELOPER
+    },
     address: 'ksibet',
     phone: '0123467',
     userStatus: UserStatus.PRESENTIAL,
@@ -34,7 +42,10 @@ export const USERSLIST: User[] = [
     firstname: 'rayen',
     lastname: "cheni",
     email: 'rayen@gmail.com',
-    role: Role.DEVELOPER,
+    role: {
+      id: 3,
+      roleName: RoleEnum.POLE_MANAGER
+    },
     address: 'ksibet',
     phone: '0123467',
     userStatus: UserStatus.PRESENTIAL,
@@ -46,7 +57,10 @@ export const USERSLIST: User[] = [
     firstname: 'hamdi',
     lastname: "cheni",
     email: 'hamdimalek@gmail.com',
-    role: Role.PROJECT_MANAGER,
+    role: {
+      id: 4,
+      roleName: RoleEnum.PROJECT_MANAGER
+    },
     address: 'ksibet',
     phone: '0123467',
     userStatus: UserStatus.REMOTE,

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
+import { User } from 'src/app/core/models/user';
+import { RoleEnum } from 'src/app/core/models/roleEnum';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,18 +16,21 @@ export class SignInComponent implements OnInit {
   submitted = false;
   error = '';
   hide = true;
+  currentUser: { "accessToekn": "", "user": User };
+
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
   ) { }
+
   ngOnInit() {
     this.authForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
       password: ['', Validators.required],
     });
   }
+
   get formValue() {
     return this.authForm.controls;
   }
@@ -34,29 +39,34 @@ export class SignInComponent implements OnInit {
     this.submitted = true;
     this.error = '';
 
-    //this.router.navigate(['/dashboard/admin']);
-    //this.router.navigate(['/dashboard/projectmanager']);
-    this.router.navigate(['/dashboard/polemanager']);
-
-
-    /*
     if (this.authForm.invalid) {
-      return ;
+      return;
     } else {
       this.authService
         .login(this.formValue.email.value, this.formValue.password.value)
         .subscribe(
           (res) => {
             if (res) {
-              const role = this.authService.currentUserValue.role;
-              if (role === Role.ADMIN) {
-                this.router.navigate(['/admin/dashboard/main']);
-              } else if (role === Role.POLE_MANAGER) {
-                this.router.navigate(['/teacher/dashboard']);
-              } else if (role === Role.PROJECT_MANAGER) {
-                this.router.navigate(['/student/dashboard']);
-              } else if (role === Role.DEVELOPER) {
-                this.router.navigate(['/student/dashboard']);
+              //***** Method 1 from the localStorage direct ********** 
+              //this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+              //console.log("token: " + this.currentUser["accessToken"]);
+              //const role = this.currentUser["user"]["role"]["roleName"];
+              //console.log("Role : " + role);
+
+              // ****** method 2 from the localStorage but using a inter method ***
+              console.log("Token second method boy : " + this.authService.getCurrentUserValue.accessToken);
+              console.log(this.authService.getCurrentUserValue.user.role.roleName);
+              const accesToken = this.authService.getCurrentUserValue.accessToken;
+              const role = this.authService.getCurrentUserValue.user.role.roleName;
+              
+              if (role === RoleEnum.ADMIN) {
+                this.router.navigate(['/dashboard/admin']);
+              } else if (role === RoleEnum.POLE_MANAGER) {
+                this.router.navigate(['/dashboard/polemanager']);
+              } else if (role === RoleEnum.PROJECT_MANAGER) {
+                this.router.navigate(['/dashboard/projectmanager']);
+              } else if (role === RoleEnum.DEVELOPER) {
+                this.router.navigate(['/dashboard/developer']);
               }
             }
           },
@@ -66,7 +76,7 @@ export class SignInComponent implements OnInit {
             return this.error = error;
           }
         );
-    }*/
+    }
     console.log(this.formValue.email.value, this.formValue.password.value);
   }
 
