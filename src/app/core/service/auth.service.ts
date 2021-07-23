@@ -30,7 +30,7 @@ export class AuthService {
     return this.http
       .post<any>(Constants.APP_PORT + Constants.LOGIN_ENDPOINT + "/login", {
         email,
-        password,
+        password
       })
       .pipe(
         map((user) => {

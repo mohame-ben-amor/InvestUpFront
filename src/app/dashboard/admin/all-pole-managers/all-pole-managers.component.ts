@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PoleManager } from 'src/app/core/models/poleManager';
 import { UserStatus } from 'src/app/core/models/userStatus';
+import { AdminService } from 'src/app/core/service/admin.service';
 import { PopUpPoleManagersComponent } from './pop-up-pole-managers/pop-up-pole-managers.component';
 
 @Component({
@@ -26,11 +27,12 @@ export class AllPoleManagersComponent implements OnInit {
   displayEditPopUp = '';
   displayDeletePopUp = '';
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,private adminService: AdminService) {
 
    }
 
   ngOnInit(): void {
+    this.getAdminList(1);
   }
 
   onCreate() {
@@ -64,6 +66,19 @@ export class AllPoleManagersComponent implements OnInit {
     localStorage.setItem('lastname',lastname);
     this.onCreate();
 
+  }
+
+  getAdminList(id:number){
+    this.adminService.getAllAdmins(id).subscribe((res) => {
+      if (res) {
+        console.log("success")
+      }
+    },
+    (error) => {
+      console.log(error);
+      console.log("Error en princ " + error["error"]["message"]);
+      return ;
+    });
   }
   
 }
