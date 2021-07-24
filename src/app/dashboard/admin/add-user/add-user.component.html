@@ -8,7 +8,7 @@
                         <mat-label for="firstname">First Name <span class="text-danger" *ngIf="form.get('firstname').errors && 
                             form.get('firstname').hasError('required')">*</span></mat-label>
 
-                        <input matInput type="text" formControlName="firstname">
+                        <input matInput placeholder="Put your firstname here please" type="text" formControlName="firstname">
                         <mat-error *ngIf="form.get('firstname').hasError('required') && form.get('firstname').touched">
                             Firstname is required
                         </mat-error>
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <mat-label for="firstname">Last Name <span class="text-danger" *ngIf="form.get('lastname').errors && 
                             form.get('lastname').hasError('required')">*</span></mat-label>
-                        <input matInput type="text" formControlName="lastname">
+                        <input matInput type="text" placeholder="Put your lastname here please" formControlName="lastname">
                         <mat-error *ngIf="form.get('lastname').hasError('required') && form.get('lastname').touched">
                             Lastname is required
                         </mat-error>
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <mat-label>Password <span class="text-danger" *ngIf="form.get('password').errors && 
                             form.get('password').hasError('required')">*</span></mat-label>
-                        <input matInput type='password' formControlName="password">
+                        <input matInput type='password' placeholder="Put your secret password here please" formControlName="password">
                         <mat-error *ngIf="form.get('password').touched && form.get('password').hasError('required') ">
                             Password is required
                         </mat-error>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <mat-label>Copy Password <span class="text-danger" *ngIf="form.get('cpassword').errors && 
                             form.get('cpassword').hasError('required')">*</span></mat-label>
-                        <input matInput type='password' formControlName="cpassword">
+                        <input matInput type='password' placeholder="Repeat your secret password here please" formControlName="cpassword">
                         <mat-error *ngIf="form.get('cpassword').touched && form.get('cpassword').hasError('required') ">
                             Copy Password is required
                         </mat-error>
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <mat-label for="phone">Phone Number <span class="text-danger" *ngIf="form.get('phone').errors && 
                             form.get('phone').hasError('required')">*</span></mat-label>
-                        <input matInput type='text' formControlName="phone">
+                        <input matInput type='text' placeholder="Put your phone number here please" formControlName="phone">
                         <mat-error *ngIf="form.get('phone').touched && form.get('phone').hasError('required')">
                             Phone Number is required
                         </mat-error>
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <mat-label for="adress">Address<span class="text-danger" *ngIf="form.get('adress').errors && 
                             form.get('adress').hasError('required')">*</span></mat-label>
-                        <input matInput type='text' formControlName="adress">
+                        <input matInput type='text' placeholder="Put your local address here please" formControlName="adress">
                         <mat-error *ngIf="form.get('adress').touched && form.get('adress').hasError('required')">
                             Address is required
                         </mat-error>
@@ -116,6 +116,7 @@
                         </mat-error>
                     </div>
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error["error"]["message"]}}</div>
+                    <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
                     <br>
                     <button type="submit" mat-flat-button color="primary" class="auth-form-btn"
                         [disabled]="!form.valid">Submit</button>

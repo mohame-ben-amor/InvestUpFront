@@ -1,7 +1,7 @@
+import { UpperCasePipe } from "@angular/common";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { throwError } from "rxjs";
-import { catchError, map, tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { User } from "../models/user";
 import { UserStatus } from "../models/userStatus";
 import { WithHoldingStatus } from "../models/withHoldingStatus";
@@ -13,6 +13,7 @@ import { Constants } from "../utils/constants";
 export class AdminService {
     constructor(private http: HttpClient) { }
     token: String;
+    upper = new UpperCasePipe();
 
     createUser(
         adress: string,
@@ -22,35 +23,30 @@ export class AdminService {
         password: string,
         role: string,
         telNum: string,
-        userStatus: UserStatus,
-        withHoldingType: WithHoldingStatus) {
+        userStatusParam: UserStatus,
+        withHoldingTypeParam: WithHoldingStatus) {
+
+        let userStatus = this.upperCaseTransformer(userStatusParam);
+        let withHoldingType = this.upperCaseTransformer(withHoldingTypeParam);
 
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
-        console.log("token from the service : " + this.token);
-        const headers = new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-            'Authorization': 'Bearer ' + this.token,
-        });
 
         //<User> c'est le type de retour de l'API
         //this.http.post<User>
         return this.http
-            .post("http://localhost:8080/telework/api/user/create",
+            .post(Constants.APP_PORT + Constants.USER_ENDPOINT + "/create",
                 {
                     adress, email, firstname, lastname, password, role, telNum, userStatus, withHoldingType
                 },
                 {
-                    headers: new HttpHeaders().set("Authorization",'Bearer ' + this.token)
+                    headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
                 })
             .pipe(
                 tap(user => {
                     //Tap taaml traitement aa reponse ama ma ghir ma tbadel el response 
                     //nestaamloha par exemple bch ntastiw hajet est ce que mawjoda fl response wella ! 
-                    console.log("User service ddd" + user);
+                    console.log("User service " + user);
                     //return user;
                 }),
                 /*
@@ -75,13 +71,37 @@ export class AdminService {
             );
     }
 
-    getAllAdmins(id: number) {
+    createPole(name: string, description: string, capacity: number, reserved: number, poleManagerId: number) {
+
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+
+        return this.http.post(Constants.APP_PORT + Constants.POLE_ENDPOINT + "/create", {
+            name, description, capacity, reserved, poleManagerId
+        }, {
+            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+
+        })
+
+    }
+
+    //Assignement of pole manager to one pole ! 
+    updatePoleManager(idPoleManager: number, idPole: number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_MANAGER_ENDPOINT + `/update/pole/${idPoleManager}/${idPole}`;
+        return this.http.patch<string>(url, null, {
+            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+        })
+    }
+
+    getAll(id: number) {
         return this.http.get<User>(Constants.APP_PORT + Constants.ADMIN_ENDPOINT + "/filterById/",
             {
                 headers: new HttpHeaders({
                     'Authorization': 'Bearer ' + this.token,
                 }),
-                params : new HttpParams().set('id',id.toString())
+                params: new HttpParams().set('id', id.toString())
             }
         ).pipe(
             map((admin) => {
@@ -93,5 +113,9 @@ export class AdminService {
         );
     }
 
+
+    upperCaseTransformer(value: string): string {
+        return this.upper.transform(value);
+    }
 
 }

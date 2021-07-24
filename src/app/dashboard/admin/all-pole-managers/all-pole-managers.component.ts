@@ -5,6 +5,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PoleManager } from 'src/app/core/models/poleManager';
 import { UserStatus } from 'src/app/core/models/userStatus';
 import { AdminService } from 'src/app/core/service/admin.service';
+import { PoleManagerService } from 'src/app/core/service/pole-manager.service';
 import { PopUpPoleManagersComponent } from './pop-up-pole-managers/pop-up-pole-managers.component';
 
 @Component({
@@ -18,8 +19,9 @@ export class AllPoleManagersComponent implements OnInit {
   closeResult: string;
   editForm: FormGroup;
   
-  poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
-  new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
+ // poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
+  //new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
+  poleManagers: PoleManager[]=[];
 
   withHoldingStatusList = ["None", "In vacation", "Sick days", "Suspension"];
 
@@ -27,12 +29,14 @@ export class AllPoleManagersComponent implements OnInit {
   displayEditPopUp = '';
   displayDeletePopUp = '';
 
-  constructor(private dialog: MatDialog,private adminService: AdminService) {
+  constructor(private dialog: MatDialog, 
+    private adminService: AdminService,
+    private poleManagerService: PoleManagerService) {
 
    }
 
   ngOnInit(): void {
-    this.getAdminList(1);
+    this.getAllPoleManagers();
   }
 
   onCreate() {
@@ -43,7 +47,6 @@ export class AllPoleManagersComponent implements OnInit {
   }
   
   onEdit(id: number) {
-    console.log("id pole manager from edit button: " + id);
     this.idPoleManager = id.toString();
     this.displayEditPopUp = 'true';
     this.displayDeletePopUp = 'false';
@@ -55,7 +58,6 @@ export class AllPoleManagersComponent implements OnInit {
 
   onDelete(id: number,firstname:string,lastname:string) {
 
-    console.log("id pole manager from edit button: " + id);
     this.idPoleManager = id.toString();
     this.displayEditPopUp = 'false';
     this.displayDeletePopUp = 'true';
@@ -68,17 +70,11 @@ export class AllPoleManagersComponent implements OnInit {
 
   }
 
-  getAdminList(id:number){
-    this.adminService.getAllAdmins(id).subscribe((res) => {
-      if (res) {
-        console.log("success")
-      }
-    },
-    (error) => {
-      console.log(error);
-      console.log("Error en princ " + error["error"]["message"]);
-      return ;
-    });
+
+  getAllPoleManagers() {
+    this.poleManagerService.getAll().subscribe(
+      poleManager => {
+        this.poleManagers = poleManager;
+      });
   }
-  
 }

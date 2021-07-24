@@ -8,7 +8,7 @@
                         <mat-label for="name"> Name <span class="text-danger" *ngIf="form.get('name').errors && 
                             form.get('name').hasError('required')">*</span></mat-label>
 
-                        <input matInput type="text" formControlName="name">
+                        <input matInput type="text" placeholder="Put pole's name here please" formControlName="name">
                         <mat-error *ngIf="form.get('name').hasError('required') && form.get('name').touched">
                             Pole Name is required
                         </mat-error>
@@ -20,7 +20,8 @@
                     <div class="form-group">
                         <mat-label for="description">Description <span class="text-danger" *ngIf="form.get('description').errors && 
                             form.get('description').hasError('required')">*</span></mat-label>
-                        <input matInput type="text" formControlName="description">
+                        <input matInput type="text" placeholder="Put a small description here please"
+                            formControlName="description">
                         <mat-error
                             *ngIf="form.get('description').hasError('required') && form.get('description').touched">
                             Description is required
@@ -48,7 +49,8 @@
                     <div class="form-group">
                         <mat-label>Capacity Places <span class="text-danger" *ngIf="form.get('capacity').errors && 
                             form.get('capacity').hasError('required')">*</span></mat-label>
-                        <input matInput type='text' formControlName="capacity">
+                        <input matInput type='text' placeholder="Put the pole's capacity places here please"
+                            formControlName="capacity">
                         <mat-error *ngIf="form.get('capacity').touched && form.get('capacity').hasError('required')">
                             Capacity is required
                         </mat-error>
@@ -59,7 +61,8 @@
                     <div class="form-group">
                         <mat-label>Reserved Places <span class="text-danger" *ngIf="form.get('reserved').errors && 
                             form.get('reserved').hasError('required')">*</span></mat-label>
-                        <input matInput type='text' formControlName="reserved">
+                        <input matInput type='text' placeholder="Put the pole's reserved places here please"
+                            formControlName="reserved">
                         <mat-error *ngIf="form.get('reserved').touched && form.get('reserved').hasError('required')">
                             Reserved is required
                         </mat-error>
@@ -67,6 +70,10 @@
                             Please enter a valid Reserved Number
                         </mat-error>
                     </div>
+
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error["error"]["message"]}}</div>
+                    <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+                    <br>
 
                     <button type="submit" mat-flat-button color="primary" class="auth-form-btn"
                         [disabled]="!form.valid">Submit</button>

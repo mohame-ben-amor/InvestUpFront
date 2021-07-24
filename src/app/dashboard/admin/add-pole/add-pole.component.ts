@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Pole } from 'src/app/core/models/pole';
 import { PoleManager } from 'src/app/core/models/poleManager';
 import { UserStatus } from 'src/app/core/models/userStatus';
+import { AdminService } from 'src/app/core/service/admin.service';
+import { PoleManagerService } from 'src/app/core/service/pole-manager.service';
 
 @Component({
   selector: 'app-add-pole',
@@ -13,14 +13,18 @@ import { UserStatus } from 'src/app/core/models/userStatus';
 export class AddPoleComponent implements OnInit {
 
   form: FormGroup;
-  poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
-  new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
+  poleManagers: PoleManager[] = [];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private adminService: AdminService,
+    private poleManagerService: PoleManagerService) { }
+  error = "";
+  success = "";
 
   ngOnInit(): void {
     this.initForm();
+    this.getAllPoleManagers();
   }
+  
   private initForm() {
 
     this.form = new FormGroup({
@@ -39,10 +43,53 @@ export class AddPoleComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this.onClear();
+
+    if (this.form.invalid) {
+      return;
+    } else {
+      this.error = "";
+      this.success = "";
+      this.adminService
+        .createPole(
+          this.form.value.name,
+          this.form.value.description,
+          this.form.value.capacity,
+          this.form.value.reserved,
+          this.form.value.poleManager
+        )
+        .subscribe(
+          (res) => {
+            let idPole = res["id"];
+            let idPoleManager = this.form.value.poleManager;
+            this.adminService.updatePoleManager(idPoleManager, idPole).subscribe(
+            (response) => {
+              console.log("ceci le pole name en princ : " + response);
+            },
+            (updateErrorMessage)=>{
+                console.log("update error message "+updateErrorMessage["error"]["message"]);
+              }
+            );
+
+            this.form.reset();
+            return this.success = "Your request has been sent successfuly ";
+          },
+          (errorMessage) => {
+            console.log("Details Error " + errorMessage["error"]["message"]);
+            return this.error = errorMessage;
+          }
+        );
+    }
   }
+
   onClear() {
     this.form.reset();
+  }
+
+  getAllPoleManagers() {
+    this.poleManagerService.getAll().subscribe(
+      poleManager => {
+        this.poleManagers = poleManager;
+
+      });
   }
 }

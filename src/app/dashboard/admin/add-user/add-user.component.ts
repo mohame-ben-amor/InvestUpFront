@@ -17,9 +17,9 @@ export class AddUserComponent implements OnInit {
   userStatusList = ["Presential", "Remote"];
   withHoldingStatusList = ["None", "In vacation", "Sick days", "Suspension"];
   error = '';
+  success = '';
 
-  constructor(private adminService: AdminService
-  ) { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
     this.initForm();
@@ -52,6 +52,8 @@ export class AddUserComponent implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
+      this.error = "";
+      this.success = "";
       this.adminService
         .createUser(
           this.form.value.adress,
@@ -63,41 +65,25 @@ export class AddUserComponent implements OnInit {
           this.form.value.phone,
           this.form.value.userStatus,
           this.form.value.withHoldingStatus
-          )
+        )
         .subscribe(
           (res) => {
-            console.log("success : " + res);
+            this.form.reset();
+            return this.success = "Your request has been sent successfuly ";
           },
           (errorMessage) => {
-            console.log(errorMessage);
-            console.log("Error en princ " + errorMessage["error"]["message"]);
+            console.log("Global Error: " + errorMessage);
+            console.log("Details Error " + errorMessage["error"]["message"]);
             return this.error = errorMessage;
-          //  console.log(errorMessage);
+            //  console.log(errorMessage);
             //return this.error = errorMessage;
           }
         );
     }
-    console.log(this.form.value.adress,
-      this.form.value.email,
-      this.form.value.firstname,
-      this.form.value.lastname,
-      this.form.value.password,
-      this.form.value.role,
-      this.form.value.phone,
-      this.form.value.userStatus,
-      this.form.value.withHoldingStatus);
-    this.form.reset();
   }
-
-
-
   onClear() {
     this.form.reset();
   }
-  /*
-    onEditUser(){
-      this.router.navigate(['edit'],{relativeTo:this.route});
-    }
-    */
+
 }
 

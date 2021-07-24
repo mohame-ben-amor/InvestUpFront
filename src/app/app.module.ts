@@ -30,6 +30,7 @@ import { MainComponent } from './dashboard/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectManagerSidebarComponent } from './shared-layout/project-manager-sidebar/project-manager-sidebar.component';
 import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sidebar/pole-manager-sidebar.component';
+import { UpperCasePipe } from '@angular/common';
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sideba
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,UpperCasePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

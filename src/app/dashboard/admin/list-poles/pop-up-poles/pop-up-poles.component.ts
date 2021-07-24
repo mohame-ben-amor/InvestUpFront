@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { PoleManager } from 'src/app/core/models/poleManager';
 import { UserStatus } from 'src/app/core/models/userStatus';
+import { PoleManagerService } from 'src/app/core/service/pole-manager.service';
 
 @Component({
   selector: 'app-pop-up-poles',
@@ -16,10 +17,12 @@ export class PopUpPolesComponent implements OnInit {
   displayDeletePopUp = "";
   displayEditPopUp = ""
   poleName = "";
-  poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
-  new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
+  //poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
+  //new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
+  poleManagers: PoleManager[]=[];
 
-  constructor(public dialogRef: MatDialogRef<PopUpPolesComponent>) { }
+  constructor(public dialogRef: MatDialogRef<PopUpPolesComponent>,
+    private poleManagerService:PoleManagerService) { }
 
   ngOnInit(): void {
     this.idPole = localStorage.getItem('idPole');
@@ -63,5 +66,14 @@ export class PopUpPolesComponent implements OnInit {
     localStorage.removeItem('displayDeletePopUp');
     localStorage.removeItem('poleName');
     this.dialogRef.close();
+  }
+
+  getAllPoleManagers() {
+    this.poleManagerService.getAll().subscribe(
+      poleManager => {
+        console.log("Pole manager table from API "+poleManager);
+        this.poleManagers = poleManager;
+        console.log("Pole manager table from componenent : "+ poleManager)
+      });
   }
 }
