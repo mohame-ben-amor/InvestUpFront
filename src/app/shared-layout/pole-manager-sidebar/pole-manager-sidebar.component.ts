@@ -9,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PoleManagerSidebarComponent implements OnInit {
 
-  constructor() { }
+  firstname = "";
+  lastname = "";
+  
+  constructor(){}
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getCredentials();
   }
+  getCredentials(){
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.firstname = currentUser["user"]["firstname"];
+    this.lastname=currentUser["user"]["lastname"];
+  } 
 
 }

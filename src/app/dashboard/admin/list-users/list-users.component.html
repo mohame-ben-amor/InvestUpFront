@@ -27,22 +27,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let usersItem of usersItems">
+              <tr *ngFor="let usersItem of users">
                 <td>
                   {{usersItem.firstname}} {{usersItem.lastname}}
                 </td>
-                <td>{{usersItem.phone}}</td>
+                <td>{{usersItem.telNum}}</td>
                 <td>{{usersItem.email}}</td>
-                <td>{{usersItem.address}}</td>
-                <td>{{usersItem.role}}</td>
+                <td>{{usersItem.adress}}</td>
+                <td>{{usersItem.role.roleName}}</td>
                 <td>{{usersItem.userStatus}}</td>
-                <td>{{usersItem.withHoldingStatus}}</td>
+                <td>{{toString(usersItem.withHoldingType)}}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-
     </div>
   </div>
 </div>

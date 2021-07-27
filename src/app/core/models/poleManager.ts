@@ -13,7 +13,7 @@ export class PoleManager {
     userStatus: UserStatus;
     presential:number;
     remote:number;
-    withHoldingStatus: WithHoldingStatus;
+    withHoldingType: WithHoldingStatus;
     role: Role;
     pole: Pole;
 }

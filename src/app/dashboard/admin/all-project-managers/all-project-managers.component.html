@@ -23,24 +23,28 @@
                                 <th>Address</th>
                                 <th>Latest Projects</th>
                                 <th>Work Status</th>
-                                <th>Edit</th>
+                                <th>With holding Status</th>
+                                <th *ngIf="role =='Admin'">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let projectManager of projectManagers">
+                            <tr *ngFor="let project of projects">
                                 <td>
-                                    {{projectManager.firstname}} {{projectManager.lastname}}
+                                    {{project.projectManager.firstname}} {{project.projectManager.lastname}}
                                 </td>
-                                <td>{{projectManager.phone}}</td>
-                                <td>{{projectManager.email}}</td>
-                                <td>{{projectManager.address}}</td>
-                                <td>{{projectManager.projects}}</td>
-                                <td>{{projectManager.userStatus}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-outline-info" id="edit-button-style" (click)="onEdit(projectManager.id)">
+                                <td>{{project.projectManager.telNum}}</td>
+                                <td>{{project.projectManager.email}}</td>
+                                <td>{{project.projectManager.adress}}</td>
+                                <td>{{project.name ==undefined ? "doesn't have projects":project.name}}
+                                <td>{{project.projectManager.userStatus}}</td>
+                                <td>{{toString(project.projectManager.withHoldingType)}}</td>
+                                <td *ngIf="role =='Admin'">
+                                    <button type="button" class="btn btn-outline-info" id="edit-button-style"
+                                        (click)="onEdit(project.projectManager.id)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    <button type="button" class="btn btn-outline-danger" id="delete-button-style" (click)="onDelete(projectManager.id,projectManager.firstname,projectManager.lastname)">
+                                    <button type="button" class="btn btn-outline-danger" id="delete-button-style"
+                                        (click)="onDelete(project.projectManager.id,project.projectManager.firstname,project.projectManager.lastname)">
                                         <mat-icon>delete_forever</mat-icon>
                                     </button>
                                 </td>

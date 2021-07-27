@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
-import { UserStatus } from 'src/app/core/models/userStatus';
+import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 import { PopUpComponent } from './pop-up/pop-up.component';
 
 @Component({
@@ -11,19 +11,20 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 })
 export class MyTeamsComponent implements OnInit {
 
-
-  public developers = [
-    new Developer(1, "rayen", "baabba", "2222", "rayen@", "ddddd", ["le mayekhdemshhahahahaha"], UserStatus.PRESENTIAL),
-    new Developer(1, "alaa", "baabba", "2222", "rayen@", "ddddd", ["le mayekhdemshhahahahaha"], UserStatus.REMOTE)
-  ];
-
-  constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-
-  }
+  idProjectManager = "";
+  developers: Developer[][] = [[]];
+  devs: Developer[];
   displayCreatePopUp = "";
   displayDeletePopUp = "";
+
+  constructor(private dialog: MatDialog,
+    private projectManagerService: ProjectManagerService) { }
+
+  ngOnInit(): void {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.idProjectManager = currentUser["user"]["id"];
+    this.getAllDevelopersByProjectManager();
+  }
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -41,11 +42,34 @@ export class MyTeamsComponent implements OnInit {
   }
 
   onDeleteProject() {
-    console.log("heeeeey ")
     this.displayCreatePopUp = 'false';
     this.displayDeletePopUp = 'true';
     localStorage.setItem('displayEditPopUp', this.displayCreatePopUp);
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
     this.onCreate();
+  }
+
+  getAllDevelopersByProjectManager() {
+    this.projectManagerService.getAllDevelopersByProjectManager(+this.idProjectManager).subscribe(
+      (result) => {
+        console.log(result.length);
+        for (let i = 0; i < result.length; i++) {
+          console.log(result[i]);
+        }
+        this.developers = result;
+        this.getDev(this.developers);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+  }
+
+  getDev(value: Developer[][]) {
+    for (let i = 0; i < value.length; i++) {
+      console.log("dev "+i+" lenght : "+value[i].length);
+      this.devs = value[i];
+    }
   }
 }

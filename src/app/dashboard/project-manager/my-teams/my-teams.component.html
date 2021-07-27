@@ -27,10 +27,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let developer of developers">
-                                <td>
-                                    {{developer.firstname}} {{developer.lastname}}
-                                </td>
+                            <tr *ngFor="let developer of devs">
+                                <td>{{developer.firstname}} {{developer.lastname}}</td>
                                 <td>{{developer.phone}}</td>
                                 <td>{{developer.email}}</td>
                                 <td>{{developer.address}}</td>

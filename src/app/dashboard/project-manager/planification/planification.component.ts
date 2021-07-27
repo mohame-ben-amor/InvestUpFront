@@ -13,8 +13,7 @@ export class PlanificationComponent implements OnInit {
 
   form: FormGroup;
   decision = ["Presential", "Remote"];
-  developers: Developer[] = [new Developer(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", ["dev site", "jeeniso site"], UserStatus.REMOTE),
-  new Developer(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", ["marketing site"], UserStatus.PRESENTIAL)];
+  developers: Developer[] = [];
 
 
   constructor(private router: Router,

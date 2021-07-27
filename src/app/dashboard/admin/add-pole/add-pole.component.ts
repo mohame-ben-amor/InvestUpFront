@@ -61,7 +61,7 @@ export class AddPoleComponent implements OnInit {
           (res) => {
             let idPole = res["id"];
             let idPoleManager = this.form.value.poleManager;
-            this.adminService.updatePoleManager(idPoleManager, idPole).subscribe(
+            this.poleManagerService.updatePole(idPoleManager, idPole).subscribe(
             (response) => {
               console.log("ceci le pole name en princ : " + response);
             },

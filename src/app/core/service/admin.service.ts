@@ -25,13 +25,10 @@ export class AdminService {
         telNum: string,
         userStatusParam: UserStatus,
         withHoldingTypeParam: WithHoldingStatus) {
-
         let userStatus = this.upperCaseTransformer(userStatusParam);
         let withHoldingType = this.upperCaseTransformer(withHoldingTypeParam);
-
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
-
         //<User> c'est le type de retour de l'API
         //this.http.post<User>
         return this.http
@@ -72,25 +69,11 @@ export class AdminService {
     }
 
     createPole(name: string, description: string, capacity: number, reserved: number, poleManagerId: number) {
-
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
-
         return this.http.post(Constants.APP_PORT + Constants.POLE_ENDPOINT + "/create", {
             name, description, capacity, reserved, poleManagerId
         }, {
-            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
-
-        })
-
-    }
-
-    //Assignement of pole manager to one pole ! 
-    updatePoleManager(idPoleManager: number, idPole: number) {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        this.token = currentUser["accessToken"];
-        let url = Constants.APP_PORT + Constants.POLE_MANAGER_ENDPOINT + `/update/pole/${idPoleManager}/${idPole}`;
-        return this.http.patch<string>(url, null, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }
@@ -112,7 +95,6 @@ export class AdminService {
             })
         );
     }
-
 
     upperCaseTransformer(value: string): string {
         return this.upper.transform(value);

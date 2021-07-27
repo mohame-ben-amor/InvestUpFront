@@ -7,9 +7,16 @@ import { Component, OnInit, } from '@angular/core';
   styles: [`.router-link-active { background-color: #19B3D3; }`]
 })
 export class SidebarComponent implements OnInit {
-
+  
+  firstname = "";
+  lastname = "";
   ngOnInit() {
-
+    this.getCredentials();
+  }
+  getCredentials(){
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.firstname = currentUser["user"]["firstname"];
+    this.lastname=currentUser["user"]["lastname"];
   }
 
 }

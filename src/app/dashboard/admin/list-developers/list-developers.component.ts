@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
-import { ProjectManager } from 'src/app/core/models/projectManager';
-import { UserStatus } from 'src/app/core/models/userStatus';
+import { Project } from 'src/app/core/models/project';
+import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
+import { DeveloperService } from 'src/app/core/service/developers.service';
+import { ProjectManagerSidebarComponent } from 'src/app/shared-layout/project-manager-sidebar/project-manager-sidebar.component';
 import { PopUpDevelopersComponent } from './pop-up-developers/pop-up-developers.component';
 
 @Component({
@@ -12,16 +14,20 @@ import { PopUpDevelopersComponent } from './pop-up-developers/pop-up-developers.
 })
 export class ListDevelopersComponent implements OnInit {
 
-  developers: Developer[] = [new ProjectManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", ["dev site", "jeeniso site"], UserStatus.REMOTE),
-  new Developer(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", ["marketing site"], UserStatus.PRESENTIAL)];
-
-  constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
+  developers: Developer[] = [];
   idDeveloper = '';
   displayEditPopUp = '';
   displayDeletePopUp = '';
+  role ="";
+
+  constructor(private dialog: MatDialog,
+    private developerService: DeveloperService) { }
+
+  ngOnInit(): void {
+    this.checkRole();
+    this.getAll();
+  }
+
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -52,5 +58,31 @@ export class ListDevelopersComponent implements OnInit {
     localStorage.setItem('lastname', lastname);
     this.onCreate();
 
+  }
+
+  getAll() {
+    this.developerService.getAll().subscribe(
+      developers => {
+        this.developers = developers;
+      });
+  }
+
+  toString(value: string): string {
+    switch (value) {
+      case "IN_VACATION":
+        return WithHoldingStatus.IN_VACATION;
+      case "SICK_DAYS":
+        return WithHoldingStatus.SICK_DAYS;
+
+      case "SUSPENSION":
+        return WithHoldingStatus.SUSPENSION;
+      case "NONE":
+        return WithHoldingStatus.NONE;
+    }
+  }
+
+  checkRole() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.role = currentUser["user"]["role"]["roleName"];
   }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PoleManager } from 'src/app/core/models/poleManager';
-import { UserStatus } from 'src/app/core/models/userStatus';
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { PopUpComponent } from './pop-up/pop-up.component';
-import { ProjectManager } from 'src/app/core/models/projectManager';
+import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
+import { Project } from 'src/app/core/models/project';
+import { ProjectService } from 'src/app/core/service/project.service';
 
 @Component({
   selector: 'app-all-project-managers',
@@ -12,16 +12,19 @@ import { ProjectManager } from 'src/app/core/models/projectManager';
 })
 export class AllProjectManagersComponent implements OnInit {
 
-  projectManagers: ProjectManager[] = [new ProjectManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", ["dev site", "jeeniso site"], UserStatus.REMOTE),
-  new ProjectManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", ["marketing site"], UserStatus.PRESENTIAL)];
-
-  constructor(private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
+  projects: Project[] = [];
   idProjectManager = '';
   displayEditPopUp = '';
   displayDeletePopUp = '';
+  role ="";
+
+  constructor(private dialog: MatDialog,
+    private projectService : ProjectService) { }
+
+  ngOnInit(): void {
+    this.checkRole();
+    this.getAll();
+  }
 
   onCreate() {
     const dialogConfig = new MatDialogConfig();
@@ -29,8 +32,8 @@ export class AllProjectManagersComponent implements OnInit {
     dialogConfig.width = '40%';
     this.dialog.open(PopUpComponent, dialogConfig);
   }
+
   onEdit(id: number) {
-    console.log("id project manager from edit button: " + id);
     this.idProjectManager = id.toString();
     this.displayEditPopUp = 'true';
     this.displayDeletePopUp = 'false';
@@ -39,9 +42,8 @@ export class AllProjectManagersComponent implements OnInit {
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
     this.onCreate();
   }
-  onDelete(id: number, firstname: string, lastname: string) {
 
-    console.log("id project manager from edit button: " + id);
+  onDelete(id: number, firstname: string, lastname: string) {
     this.idProjectManager = id.toString();
     this.displayEditPopUp = 'false';
     this.displayDeletePopUp = 'true';
@@ -51,6 +53,32 @@ export class AllProjectManagersComponent implements OnInit {
     localStorage.setItem('firstname', firstname);
     localStorage.setItem('lastname', lastname);
     this.onCreate();
+  }
 
+  getAll() {
+    this.projectService.getAll().subscribe(
+      projects => {
+        this.projects = projects;
+      });
+  }
+
+
+  toString(value: string): string {
+    switch (value) {
+      case "IN_VACATION":
+        return WithHoldingStatus.IN_VACATION;
+      case "SICK_DAYS":
+        return WithHoldingStatus.SICK_DAYS;
+
+      case "SUSPENSION":
+        return WithHoldingStatus.SUSPENSION;
+      case "NONE":
+        return WithHoldingStatus.NONE;
+    }
+  }
+
+  checkRole() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.role = currentUser["user"]["role"]["roleName"];
   }
 }

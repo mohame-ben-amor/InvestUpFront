@@ -22,8 +22,10 @@
                     Please choose an option
                 </mat-error>
             </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+            <br>
         </form>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
@@ -38,9 +40,9 @@
     <div class="modal-header">
         <h4 class="modal-title" id="modal-title">Profile deletion</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-        (click)="onCancel()">
-        <mat-icon>close</mat-icon>
-    </button>
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
     </div>
     <div class="modal-body">
         <p><strong>Are you sure you want to delete <span class="text-primary"> {{firstname}}
@@ -49,6 +51,9 @@
             <span class="text-danger">This operation can not be undone.</span>
         </p>
     </div>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+    <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+    <br>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
         <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Ok</button>

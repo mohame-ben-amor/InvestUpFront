@@ -26,14 +26,16 @@
                 <mat-label for="role">Role<span class="text-danger" *ngIf="editForm.get('role').errors && 
                     editForm.get('role').hasError('required')">*</span></mat-label>
                 <select formControlName="role" name="role">
-                  <option *ngFor="let role of roles" [value]="role">{{role}} </option>
+                    <option *ngFor="let role of roles" [value]="role">{{role}} </option>
                 </select>
                 <mat-error *ngIf="editForm.get('role').hasError('required') && editForm.get('role').touched">
-                  Please choose an option
+                    Please choose an option
                 </mat-error>
-              </div>
+            </div>
         </form>
-
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+        <br>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
@@ -48,9 +50,9 @@
     <div class="modal-header">
         <h4 class="modal-title" id="modal-title">Profile deletion</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-        (click)="onCancel()">
-        <mat-icon>close</mat-icon>
-    </button>
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
     </div>
     <div class="modal-body">
         <p><strong>Are you sure you want to delete <span class="text-primary"> {{firstname}}
@@ -58,6 +60,9 @@
         <p>All information associated to this user profile will be permanently deleted.
             <span class="text-danger">This operation can not be undone.</span>
         </p>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+        <br>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>

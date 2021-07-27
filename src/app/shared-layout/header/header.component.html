@@ -9,11 +9,11 @@
           <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
             <img src="./assets/images/logo.png" alt="" class="user-image mr-1 p-2" />
 
-            User Name
+            {{firstname}} {{lastname}}
             <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="open(content)">
+            <button mat-menu-item >
               <mat-icon>settings</mat-icon>
               Settings
             </button>
@@ -39,7 +39,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="editForm">
       <!--ICI votre form-->
       <div class="form-group">
         <mat-label>Current Password <span class="text-danger" *ngIf="editForm.get('password').errors && 

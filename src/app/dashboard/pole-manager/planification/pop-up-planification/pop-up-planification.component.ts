@@ -15,7 +15,6 @@ export class PopUpPlanificationComponent implements OnInit {
   displayEditPopUp = "" ;
   decision = ["Presential", "Remote"];
 
-
   constructor(public dialogRef: MatDialogRef<PopUpPlanificationComponent>,private route:Router) { }
 
   ngOnInit(): void {

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PoleManager } from 'src/app/core/models/poleManager';
 import { UserStatus } from 'src/app/core/models/userStatus';
+import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
 import { AdminService } from 'src/app/core/service/admin.service';
 import { PoleManagerService } from 'src/app/core/service/pole-manager.service';
 import { PopUpPoleManagersComponent } from './pop-up-pole-managers/pop-up-pole-managers.component';
@@ -18,24 +19,20 @@ export class AllPoleManagersComponent implements OnInit {
 
   closeResult: string;
   editForm: FormGroup;
-  
- // poleManagers: PoleManager[] = [new PoleManager(1, "Rayen", "CEHRNI", "222222222", "roro@cherni", "abdlahmid", "dev dev", UserStatus.REMOTE),
-  //new PoleManager(2, "BEN amor", "Hama", "222222222", "rayen@cherni", "abdlahmid", "dev marketing", UserStatus.PRESENTIAL)];
-  poleManagers: PoleManager[]=[];
-
+  poleManagers: PoleManager[] = [];
   withHoldingStatusList = ["None", "In vacation", "Sick days", "Suspension"];
-
   idPoleManager = '';
   displayEditPopUp = '';
   displayDeletePopUp = '';
+  role ="";
 
-  constructor(private dialog: MatDialog, 
-    private adminService: AdminService,
+  constructor(private dialog: MatDialog,
     private poleManagerService: PoleManagerService) {
 
-   }
+  }
 
   ngOnInit(): void {
+    this.checkRole();
     this.getAllPoleManagers();
   }
 
@@ -45,7 +42,7 @@ export class AllPoleManagersComponent implements OnInit {
     dialogConfig.width = '40%';
     this.dialog.open(PopUpPoleManagersComponent, dialogConfig);
   }
-  
+
   onEdit(id: number) {
     this.idPoleManager = id.toString();
     this.displayEditPopUp = 'true';
@@ -56,18 +53,16 @@ export class AllPoleManagersComponent implements OnInit {
     this.onCreate();
   }
 
-  onDelete(id: number,firstname:string,lastname:string) {
-
+  onDelete(id: number, firstname: string, lastname: string) {
     this.idPoleManager = id.toString();
     this.displayEditPopUp = 'false';
     this.displayDeletePopUp = 'true';
     localStorage.setItem('idPoleManager', this.idPoleManager);
     localStorage.setItem('displayEditPopUp', this.displayEditPopUp);
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
-    localStorage.setItem('firstname',firstname);
-    localStorage.setItem('lastname',lastname);
+    localStorage.setItem('firstname', firstname);
+    localStorage.setItem('lastname', lastname);
     this.onCreate();
-
   }
 
 
@@ -76,5 +71,24 @@ export class AllPoleManagersComponent implements OnInit {
       poleManager => {
         this.poleManagers = poleManager;
       });
+  }
+
+  toString(value: string): string {
+    switch (value) {
+      case "IN_VACATION":
+        return WithHoldingStatus.IN_VACATION;
+      case "SICK_DAYS":
+        return WithHoldingStatus.SICK_DAYS;
+
+      case "SUSPENSION":
+        return WithHoldingStatus.SUSPENSION;
+      case "NONE":
+        return WithHoldingStatus.NONE;
+    }
+  }
+
+  checkRole() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.role = currentUser["user"]["role"]["roleName"];
   }
 }

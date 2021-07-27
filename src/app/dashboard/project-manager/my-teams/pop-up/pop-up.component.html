@@ -1,7 +1,7 @@
 <!-- Crete Pop up-->
 <div *ngIf="displayCreatePopUp=='true'">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title" class="title">With holding status update</h4>
+        <h4 class="modal-title" id="modal-basic-title" class="title">Create Project</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
             (click)="onCancel()">
             <mat-icon>close</mat-icon>
@@ -9,7 +9,6 @@
     </div>
     <div class="modal-body">
         <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-
             <div class="form-group">
                 <mat-label for="name"> Name <span class="text-danger" *ngIf="createForm.get('name').errors && 
                     createForm.get('name').hasError('required')">*</span></mat-label>
@@ -24,7 +23,9 @@
                     characters. </mat-error>
             </div>
         </form>
-
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+        <br>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
@@ -33,9 +34,9 @@
     </div>
 </div>
 
+
 <!--Delete pop up-->
 <div *ngIf="displayDeletePopUp=='true'">
-
     <div class="modal-header">
         <h4 class="modal-title" id="modal-title">Project deletion</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
@@ -48,23 +49,22 @@
         <p>All information associated to this project profile will be permanently deleted.
             <span class="text-danger">This operation can not be undone.</span>
         </p>
-        <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-
-
+        <form [formGroup]="deleteForm" (ngSubmit)="onDelete()">
             <div class="form-group">
-                <mat-label for="name">Project Name <span class="text-danger" *ngIf="createForm.get('name').errors && 
-                    createForm.get('name').hasError('required')">*</span></mat-label>
-                <select formControlName="name" name="name">
+                <mat-label for="projectName">Project Name <span class="text-danger" *ngIf="deleteForm.get('projectName').errors && 
+                    deleteForm.get('projectName').hasError('required')">*</span></mat-label>
+                <select formControlName="projectName" name="projectName">
                     <option *ngFor="let project of projects" [value]="project.id">{{project.name}} </option>
                 </select>
-                <mat-error *ngIf="createForm.get('name').hasError('required') && createForm.get('name').touched">
+                <mat-error *ngIf="deleteForm.get('projectName').hasError('required') && deleteForm.get('projectName').touched">
                     Please choose an option
                 </mat-error>
             </div>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+            <br>
         </form>
-
     </div>
-
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
         <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Ok</button>

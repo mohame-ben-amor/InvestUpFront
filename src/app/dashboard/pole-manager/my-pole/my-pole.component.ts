@@ -10,7 +10,7 @@ import { PopUpEditPoleComponent } from './pop-up-edit-pole/pop-up-edit-pole.comp
 })
 export class MyPoleComponent implements OnInit {
   
-  poles = [new Pole(1, "Dev", "HAMA Hama", "BLA", 33, 4)];
+  poles : Pole[]=[];
 
   constructor(private dialog: MatDialog) {}
   

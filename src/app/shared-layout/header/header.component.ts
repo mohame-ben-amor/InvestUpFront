@@ -15,11 +15,13 @@ export class HeaderComponent implements OnInit {
 
   editForm: FormGroup;
   closeResult: string;
+  firstname="";
+  lastname="";
 
-  constructor(private router: Router,
-    private modalService: NgbModal) { }
+  constructor() { }
 
   ngOnInit(): void {
+    this.getCredentials();
     this.initForm();
   }
 
@@ -34,29 +36,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  //Edit form methods 
-  open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.onSubmit();
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      console.log(this.closeResult);
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
-  onSubmit() {
-    console.log(this.editForm.value)
-    this.editForm.reset();
+  getCredentials(){
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.firstname = currentUser["user"]["firstname"];
+    this.lastname=currentUser["user"]["lastname"];
   }
 }

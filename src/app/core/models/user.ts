@@ -8,8 +8,10 @@ export class User {
   lastname: string;
   email: string;
   role: Role;
-  phone:string;
-  address:string;
+  telNum:string;
+  adress:string;
   userStatus:UserStatus;
-  withHoldingStatus:WithHoldingStatus;
+  presential : number;
+  remote : number ;
+  withHoldingType:WithHoldingStatus;
 }

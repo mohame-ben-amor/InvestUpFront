@@ -23,7 +23,8 @@
                                 <th>Address</th>
                                 <th>Latest Projects</th>
                                 <th>Work Status</th>
-                                <th>Edit</th>
+                                <th>With Holding Status</th>
+                                <th *ngIf="role =='Admin'">Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,12 +32,17 @@
                                 <td>
                                     {{developer.firstname}} {{developer.lastname}}
                                 </td>
-                                <td>{{developer.phone}}</td>
+                                <td>{{developer.telNum}}</td>
                                 <td>{{developer.email}}</td>
-                                <td>{{developer.address}}</td>
-                                <td>{{developer.projects}}</td>
+                                <td>{{developer.adress}}</td>
+                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects":null}}
+                                <select *ngFor="let item of developer.projects">
+                                    <option>{{item.name}}</option>
+                                </select>
+                                </td>
                                 <td>{{developer.userStatus}}</td>
-                                <td>
+                                <td>{{toString(developer.withHoldingType)}}</td>
+                                <td *ngIf="role =='Admin'">
                                     <button type="button" class="btn btn-outline-info" id="edit-button-style"
                                         (click)="onEdit(developer.id)">
                                         <mat-icon>edit</mat-icon>
@@ -51,7 +57,6 @@
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
