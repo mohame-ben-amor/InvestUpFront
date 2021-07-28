@@ -78,22 +78,14 @@ export class AdminService {
         })
     }
 
-    getAll(id: number) {
-        return this.http.get<User>(Constants.APP_PORT + Constants.ADMIN_ENDPOINT + "/filterById/",
-            {
-                headers: new HttpHeaders({
-                    'Authorization': 'Bearer ' + this.token,
-                }),
-                params: new HttpParams().set('id', id.toString())
-            }
-        ).pipe(
-            map((admin) => {
-                console.log(admin.id);
-                const adminArray: User[] = [];
-                adminArray.push(admin);
-                return adminArray;
-            })
-        );
+    updatePassword(currentPassword: string, newPassword: string, token: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        return this.http.patch(Constants.APP_PORT + Constants.ADMIN_ENDPOINT + "/update/password", {
+            currentPassword, newPassword, token
+        }, {
+            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+        })
     }
 
     upperCaseTransformer(value: string): string {

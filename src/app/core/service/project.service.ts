@@ -49,4 +49,15 @@ export class ProjectService {
                 return "NONE";
         }
     }
+
+    assignementOfDeveloper(idProject: number, idDeveloper: number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.PROJECT_ENDPOINT + `/updateAssignementOfDeveloper/${idProject}/${idDeveloper}`;
+        return this.http.patch<Project>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        })
+    }
 }

@@ -10,11 +10,11 @@
     </div>
     <div class="modal-body">
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-
             <div class="form-group">
                 <mat-label for="withHoldingStatus">With Holding Status <span class="text-danger" *ngIf="editForm.get('withHoldingStatus').errors && 
                 editForm.get('withHoldingStatus').hasError('required')">*</span></mat-label>
                 <select formControlName="withHoldingStatus" name="withHoldingStatus">
+                    <option value="" disabled selected>Select your option</option>
                     <option *ngFor="let status of withHoldingStatusList" [value]="status">{{status}}</option>
                 </select>
                 <mat-error

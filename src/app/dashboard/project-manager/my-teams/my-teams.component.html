@@ -21,25 +21,31 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Projects</th>
-                                <th>Work status</th>
+                                <th>Project Manager Decision</th>
+                                <th>Pole Manager Decision</th>
                                 <th>Planification starting date</th>
                                 <th>Planification deadline</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let developer of devs">
+                            <tr *ngFor="let developer of developers">
                                 <td>{{developer.firstname}} {{developer.lastname}}</td>
-                                <td>{{developer.phone}}</td>
+                                <td>{{developer.telNum}}</td>
                                 <td>{{developer.email}}</td>
-                                <td>{{developer.address}}</td>
-                                <td>{{developer.projects}}</td>
-                                <td>{{developer.userStatus}}</td>
+                                <td>{{developer.adress}}</td>
+                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects":null}}
+                                    <select id="select2" *ngFor="let item of developer.projects">
+                                        <option>{{item.name}}</option>
+                                    </select>
+                                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": toString(getLastItemInTable(developer.historiques).projectManagerDecision)}}</td>
+                                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": toString(getLastItemInTable(developer.historiques).poleManagerDecision)}}</td>
+                                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": getLastItemInTable(developer.historiques).startingDate}}</td>
+                                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification" : getLastItemInTable(developer.historiques).deadline}} </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

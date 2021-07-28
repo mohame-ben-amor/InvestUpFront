@@ -1,8 +1,11 @@
 
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/core/service/auth.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SettingsPopUpComponent } from './settings-pop-up/settings-pop-up.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+
 const document: any = window.document;
 
 @Component({
@@ -15,30 +18,38 @@ export class HeaderComponent implements OnInit {
 
   editForm: FormGroup;
   closeResult: string;
-  firstname="";
-  lastname="";
+  firstname = "";
+  lastname = "";
 
-  constructor() { }
+  constructor(private dialog: MatDialog,private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getCredentials();
-    this.initForm();
   }
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
 
-  private initForm() {
-    this.editForm = new FormGroup({
-      'password': new FormControl("", Validators.required),
-      'npassword': new FormControl("", Validators.required),
+  getCredentials() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.firstname = currentUser["user"]["firstname"];
+    this.lastname = currentUser["user"]["lastname"];
+  }
+
+  logout() {
+    this.authService.logout().subscribe((res) => {
+      if (!res.success) {
+        this.router.navigate(['/authentication/sign-in']);
+      }
     });
   }
 
-  getCredentials(){
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    this.firstname = currentUser["user"]["firstname"];
-    this.lastname=currentUser["user"]["lastname"];
+  onCreate() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    this.dialog.open(SettingsPopUpComponent, dialogConfig);
   }
 }

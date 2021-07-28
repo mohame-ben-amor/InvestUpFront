@@ -85,7 +85,7 @@ export class ProjectManagerService {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
         let url = Constants.APP_PORT + Constants.PROJECT_MANAGER_ENDPOINT + `/findDevelopersByIdProjectManager/${idProjectManager}`;
-        return this.http.get<Developer[][]>(url,{
+        return this.http.get<Developer[]>(url,{
             headers: new HttpHeaders({
                 "Authorization": 'Bearer ' + this.token
             })
@@ -101,6 +101,16 @@ export class ProjectManagerService {
                 "Authorization": 'Bearer ' + this.token
             })
         });
+    }
+
+    updatePassword(currentPassword: string, newPassword: string, token: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        return this.http.patch(Constants.APP_PORT + Constants.PROJECT_MANAGER_ENDPOINT + "/update/password", {
+            currentPassword, newPassword, token
+        }, {
+            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+        })
     }
 
     toEnum(value: string): string {

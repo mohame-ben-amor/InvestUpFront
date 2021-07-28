@@ -13,11 +13,11 @@
             <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item >
+            <button mat-menu-item (click)="onCreate()">
               <mat-icon>settings</mat-icon>
               Settings
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>exit_to_app</mat-icon>
               Logout
             </button>
@@ -27,45 +27,3 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" class="title">Profile update</h4>
-    <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-      (click)="modal.dismiss('Cross click')">
-      <!--<span aria-hidden="true">&times;</span>
-      -->
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="editForm">
-      <!--ICI votre form-->
-      <div class="form-group">
-        <mat-label>Current Password <span class="text-danger" *ngIf="editForm.get('password').errors && 
-          editForm.get('password').hasError('required')">*</span></mat-label>
-        <input matInput type='password' formControlName="password">
-        <mat-error *ngIf="editForm.get('password').touched && editForm.get('password').hasError('required') ">
-          Current Password is required
-        </mat-error>
-      </div>
-      <div class="form-group">
-        <mat-label>New Password <span class="text-danger" *ngIf="editForm.get('npassword').errors && 
-          editForm.get('npassword').hasError('required')">*</span></mat-label>
-        <input matInput type='password' formControlName="npassword">
-        <mat-error *ngIf="editForm.get('npassword').touched && editForm.get('npassword').hasError('required') ">
-          New Password is required
-        </mat-error>
-        <mat-error *ngIf="editForm.get('npassword').touched && editForm.get('npassword').value === editForm.get('password').value">
-          Passwords are the same
-        </mat-error>
-      </div>
-    </form>
-    <!--ICI votre form-->
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('cancel click')">Cancel</button>
-    <button type="submit" [disabled]="!editForm.valid" ngbAutofocus class="btn btn-outline-success"
-      (click)="modal.close('Save click')">Save</button>
-  </div>
-</ng-template>

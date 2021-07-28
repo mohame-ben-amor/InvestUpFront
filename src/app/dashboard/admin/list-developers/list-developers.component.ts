@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
-import { Project } from 'src/app/core/models/project';
 import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
 import { DeveloperService } from 'src/app/core/service/developers.service';
-import { ProjectManagerSidebarComponent } from 'src/app/shared-layout/project-manager-sidebar/project-manager-sidebar.component';
 import { PopUpDevelopersComponent } from './pop-up-developers/pop-up-developers.component';
 
 @Component({

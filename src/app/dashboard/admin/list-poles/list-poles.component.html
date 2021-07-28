@@ -22,7 +22,7 @@
                 <th>Capacity</th>
                 <th>Reserved</th>
                 <th>Pole Manager</th>
-                <th>edit</th>
+                <th *ngIf="role =='Admin'">edit</th>
               </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
                 <td>{{poleManager.pole==null? null: poleManager.pole.reserved}}</td>
                 <td>{{poleManager.pole==null? null : poleManager.firstname}}
                   {{poleManager.pole==null? null : poleManager.lastname}}</td>
-                <td *ngIf="poleManager.pole!=null">
+                <td *ngIf="role =='Admin'">
                   <button class="btn btn-outline-info" id="edit-button-style" (click)="onEdit(poleManager.pole.id,poleManager.id)">
                     <mat-icon>edit</mat-icon>
                   </button>

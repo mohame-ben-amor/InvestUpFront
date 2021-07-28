@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
+import * as Material from "@angular/material";
 
 
 import { AuthLayoutComponent } from './shared-layout/app-layout/auth-layout/auth-layout.component';
@@ -31,6 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectManagerSidebarComponent } from './shared-layout/project-manager-sidebar/project-manager-sidebar.component';
 import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sidebar/pole-manager-sidebar.component';
 import { UpperCasePipe } from '@angular/common';
+import { SettingsPopUpComponent } from './shared-layout/header/settings-pop-up/settings-pop-up.component';
+import { AssignPopUpComponent } from './dashboard/project-manager/all-developers/assign-pop-up/assign-pop-up.component';
 
 
 @NgModule({
@@ -43,6 +46,7 @@ import { UpperCasePipe } from '@angular/common';
     MainComponent,
     ProjectManagerSidebarComponent,
     PoleManagerSidebarComponent,
+    SettingsPopUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,9 +74,13 @@ import { UpperCasePipe } from '@angular/common';
     MatMenuModule,
     MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Material.MatDialogModule
   ],
+  exports: [Material.MatDialogModule],
   providers: [AuthGuard,UpperCasePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[SettingsPopUpComponent,AssignPopUpComponent]
+
 })
 export class AppModule { }

@@ -11,6 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { SettingsPopUpComponent } from './header/settings-pop-up/settings-pop-up.component';
+import * as Material from "@angular/material";
 
 @NgModule({
   declarations: [],
@@ -28,8 +30,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,
+    Material.MatDialogModule
     ],
-  
+    exports: [Material.MatDialogModule],
+
 })
 export class LayoutModule {
 

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
+import { Developer } from 'src/app/core/models/developer';
 import { Project } from 'src/app/core/models/project';
+import { DeveloperService } from 'src/app/core/service/developers.service';
 import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 import { ProjectService } from 'src/app/core/service/project.service';
 
@@ -18,6 +20,7 @@ export class PopUpComponent implements OnInit {
   displayCreatePopUp = "";
   displayDeletePopUp = "";
   projects: Project[] = [];
+  developers:Developer[]=[];
   idProjectManager = "";
   success = "";
   error = "";
@@ -25,6 +28,7 @@ export class PopUpComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PopUpComponent>,
     private projectManagerService: ProjectManagerService,
     private projectService: ProjectService,
+    private developerService:DeveloperService,
     private route: Router) { }
 
   ngOnInit(): void {
@@ -34,12 +38,15 @@ export class PopUpComponent implements OnInit {
     this.displayDeletePopUp = localStorage.getItem('displayDeletePopUp');
     this.initCreateForm();
     this.getAllProjects();
+    this.getAllDevelopers();
   }
   private initCreateForm() {
     this.createForm = new FormGroup({
       'name': new FormControl("", [Validators.required,
       Validators.minLength(2)]),
+      'developer':new FormControl("",Validators.required),
     });
+
     this.deleteForm = new FormGroup({
       'projectName': new FormControl("", Validators.required),
     })
@@ -53,6 +60,7 @@ export class PopUpComponent implements OnInit {
 
   onSubmit() {
     let name = this.createForm.value.name;
+    let idDeveloper = this.createForm.value.developer;
     this.projectManagerService.createProject(+this.idProjectManager, name).subscribe((res) => {
       if (res) {
         let idProject = res.id;
@@ -64,24 +72,27 @@ export class PopUpComponent implements OnInit {
             this.error = "Please check your networking";
           }
         );
+        this.projectService.assignementOfDeveloper(idProject,idDeveloper).subscribe(
+          (res)=>{
+            console.log(res.name);
+            this.success = "Your request has been sent successfuly ";
+          },
+          (error)=>{
+            this.error = error["error"]["message"];
+          }
+        ),
         this.success = "Your request has been sent successfuly ";
         setTimeout(() => {
           this.createForm.reset();
           this.dialogRef.close();
         }, 300)
         this.removeLocalStorage();
-        let currentUrl = this.route.url;
-        this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.route.onSameUrlNavigation = 'reload';
-        this.route.navigate([currentUrl]);
+        this.reloadPage();
       }
     },
       (error) => {
         this.error = error["statusText"] == "Unknown Error" ? "Please check your networking" : error["error"]["message"];
-        let currentUrl = this.route.url;
-        this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.route.onSameUrlNavigation = 'reload';
-        this.route.navigate([currentUrl]);
+        this.reloadPage();
       });
   }
 
@@ -121,4 +132,20 @@ export class PopUpComponent implements OnInit {
       }
     )
   }
+
+  getAllDevelopers(){
+    this.developerService.getAll().subscribe(
+      (result)=>{
+        this.developers = result;
+      }
+    )
+  }
+
+  reloadPage(){
+    let currentUrl = this.route.url;
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.onSameUrlNavigation = 'reload';
+    this.route.navigate([currentUrl]);
+  }
+
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
+import { Planification } from 'src/app/core/models/planification';
+import { UserStatus } from 'src/app/core/models/userStatus';
 import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 import { PopUpComponent } from './pop-up/pop-up.component';
 
@@ -12,13 +14,13 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 export class MyTeamsComponent implements OnInit {
 
   idProjectManager = "";
-  developers: Developer[][] = [[]];
-  devs: Developer[];
+  developers: Developer[] = [];
   displayCreatePopUp = "";
   displayDeletePopUp = "";
 
   constructor(private dialog: MatDialog,
-    private projectManagerService: ProjectManagerService) { }
+    private projectManagerService: ProjectManagerService) {
+  }
 
   ngOnInit(): void {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -53,11 +55,7 @@ export class MyTeamsComponent implements OnInit {
     this.projectManagerService.getAllDevelopersByProjectManager(+this.idProjectManager).subscribe(
       (result) => {
         console.log(result.length);
-        for (let i = 0; i < result.length; i++) {
-          console.log(result[i]);
-        }
         this.developers = result;
-        this.getDev(this.developers);
       },
       (error) => {
         console.log(error);
@@ -66,10 +64,26 @@ export class MyTeamsComponent implements OnInit {
 
   }
 
-  getDev(value: Developer[][]) {
-    for (let i = 0; i < value.length; i++) {
-      console.log("dev "+i+" lenght : "+value[i].length);
-      this.devs = value[i];
+  getLastItemInTable(planification: Planification[]): Planification {
+    const size = planification.length;
+    console.log("lenght " + size);
+    if (size == 0) {
+      return planification[0]
+    } else {
+      return planification[size - 1];
     }
   }
+
+  toString(value: string): string {
+    switch (value) {
+      case "NOT_DEFINED":
+        return "Not defined";
+      case "PRESENTIAL":
+        return "Presetial";
+      case "REMOTE":
+        return "Remote";
+    }
+
+  }
+
 }

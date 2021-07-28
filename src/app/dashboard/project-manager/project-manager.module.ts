@@ -19,13 +19,17 @@ import * as Material from "@angular/material";
 import { PlanificationComponent } from './planification/planification.component';
 import { MyTeamsComponent } from './my-teams/my-teams.component';
 import { PopUpComponent } from './my-teams/pop-up/pop-up.component';
+import { AllDevelopersComponent } from './all-developers/all-developers.component';
+import { AssignPopUpComponent } from './all-developers/assign-pop-up/assign-pop-up.component';
 
 
 @NgModule({
     declarations: [
         PlanificationComponent,
         MyTeamsComponent,
-        PopUpComponent
+        PopUpComponent,
+        AllDevelopersComponent,
+        AssignPopUpComponent
     ],
     imports: [
         CommonModule,

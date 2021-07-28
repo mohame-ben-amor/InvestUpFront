@@ -19,12 +19,14 @@ export class ListPolesComponent implements OnInit {
   displayDeletePopUp = '';
   poleManagers: PoleManager[] = [];
   poles: Pole[] = [];
+  role = "";
 
   constructor(private dialog: MatDialog,
     private poleManagerService: PoleManagerService) { }
 
   ngOnInit(): void {
     this.getListPoles();
+    this.checkRole();
   }
 
   onCreate() {
@@ -62,5 +64,11 @@ export class ListPolesComponent implements OnInit {
     localStorage.setItem('displayDeletePopUp', this.displayDeletePopUp);
     localStorage.setItem('poleName', poleName);
     this.onCreate();
+  }
+
+
+  checkRole() {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.role = currentUser["user"]["role"]["roleName"];
   }
 }

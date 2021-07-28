@@ -70,11 +70,9 @@
                             Please enter a valid Reserved Number
                         </mat-error>
                     </div>
-
                     <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error["error"]["message"]}}</div>
                     <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
                     <br>
-
                     <button type="submit" mat-flat-button color="primary" class="auth-form-btn"
                         [disabled]="!form.valid">Submit</button>
                     <button type="button" class="btn btn-danger clear-btn" (click)="onClear()">Clear</button>

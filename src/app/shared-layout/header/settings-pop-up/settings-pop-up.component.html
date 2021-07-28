@@ -1,0 +1,48 @@
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title" class="title">With holding status update</h4>
+        <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+            (click)="onCancel()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <mat-label>Current password <span class="text-danger" *ngIf="editForm.get('oldPassword').errors && 
+                    editForm.get('oldPassword').hasError('required')">*</span></mat-label>
+                <input matInput type='password' placeholder="Put your secret current password here please" formControlName="oldPassword">
+                <mat-error *ngIf="editForm.get('oldPassword').touched && editForm.get('oldPassword').hasError('required') ">
+                    Current password is required
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-label>Password <span class="text-danger" *ngIf="editForm.get('newPassword').errors && 
+                    editForm.get('newPassword').hasError('required')">*</span></mat-label>
+                <input matInput type='password' placeholder="Put your secret new password here please" formControlName="newPassword">
+                <mat-error *ngIf="editForm.get('newPassword').touched && editForm.get('newPassword').hasError('required') ">
+                    New password is required
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <mat-label>Copy Password <span class="text-danger" *ngIf="editForm.get('cPassword').errors && 
+                    editForm.get('cPassword').hasError('required')">*</span></mat-label>
+                <input matInput type='password' placeholder="Repeat your secret password here please" formControlName="cPassword">
+                <mat-error *ngIf="editForm.get('cPassword').touched && editForm.get('cPassword').hasError('required') ">
+                    Copy Password is required
+                </mat-error>
+                <mat-error *ngIf="editForm.get('cPassword').value !== editForm.get('newPassword').value">
+                    Passwords doesn't match
+                </mat-error>
+            </div>
+        </form>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+        <br>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancel</button>
+        <button type="submit" [disabled]="!editForm.valid" class="btn btn-outline-success"
+            (click)="onSubmit()">Save</button>
+    </div>
+</div>

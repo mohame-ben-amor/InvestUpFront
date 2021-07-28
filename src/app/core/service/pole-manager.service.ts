@@ -66,6 +66,16 @@ export class PoleManagerService {
         })
     }
 
+    updatePassword(currentPassword: string, newPassword: string, token: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        return this.http.patch(Constants.APP_PORT + Constants.POLE_MANAGER_ENDPOINT + "/update/password", {
+            currentPassword, newPassword, token
+        }, {
+            headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
+        })
+    }
+
     toEnum(value: string): string {
         switch (value) {
             case WithHoldingStatus.IN_VACATION:

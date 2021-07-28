@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { User } from 'src/app/core/models/user';
 import { RoleEnum } from 'src/app/core/models/roleEnum';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ContactPopUpComponent } from './contact-pop-up/contact-pop-up.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,7 +23,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -79,5 +82,10 @@ export class SignInComponent implements OnInit {
     }
     console.log(this.formValue.email.value, this.formValue.password.value);
   }
-
+  onCreate() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '40%';
+    this.dialog.open(ContactPopUpComponent, dialogConfig);
+  }
 }
