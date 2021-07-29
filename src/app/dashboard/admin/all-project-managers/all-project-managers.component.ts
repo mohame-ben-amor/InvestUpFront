@@ -4,6 +4,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
 import { Project } from 'src/app/core/models/project';
 import { ProjectService } from 'src/app/core/service/project.service';
+import { ProjectManager } from 'src/app/core/models/projectManager';
 
 @Component({
   selector: 'app-all-project-managers',
@@ -13,6 +14,7 @@ import { ProjectService } from 'src/app/core/service/project.service';
 export class AllProjectManagersComponent implements OnInit {
 
   projects: Project[] = [];
+  projectManagers: ProjectManager[] = [];
   idProjectManager = '';
   displayEditPopUp = '';
   displayDeletePopUp = '';
@@ -57,9 +59,17 @@ export class AllProjectManagersComponent implements OnInit {
 
   getAll() {
     this.projectService.getAll().subscribe(
-      projects => {
-        this.projects = projects;
+      projectManagers => {
+        this.projectManagers = projectManagers;
       });
+  }
+
+  listProjectsByProjectManager(projects : Project[]):string{
+    let output = projects[0].name;
+    for (let i=1;i<projects.length;i++){
+      output = output+", "+projects[i].name;
+    }
+    return output;
   }
 
 

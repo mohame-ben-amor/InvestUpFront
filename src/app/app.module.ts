@@ -27,7 +27,6 @@ import * as Material from "@angular/material";
 import { AuthLayoutComponent } from './shared-layout/app-layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared-layout/app-layout/main-layout/main-layout.component';
 import { AuthGuard } from './core/auth-guard.service';
-import { MainComponent } from './dashboard/main/main.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectManagerSidebarComponent } from './shared-layout/project-manager-sidebar/project-manager-sidebar.component';
 import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sidebar/pole-manager-sidebar.component';
@@ -43,7 +42,6 @@ import { AssignPopUpComponent } from './dashboard/project-manager/all-developers
     MainLayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    MainComponent,
     ProjectManagerSidebarComponent,
     PoleManagerSidebarComponent,
     SettingsPopUpComponent,

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { MainComponent } from './main/main.component';
 import { ProjectManagerComponent } from './project-manager/project-manager.component';
 const routes: Routes = [
 
@@ -26,10 +25,6 @@ const routes: Routes = [
     component: ProjectManagerComponent,
     loadChildren: () =>
       import('./pole-manager/pole-manager.module').then((m) => m.PoleManagerdModule),
-  },
-  {
-    path: 'main',
-    component: MainComponent,
   },
   /**
    * complete your paths!

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-pole-manager-sidebar',
   templateUrl: './pole-manager-sidebar.component.html',
   styleUrls: ['./pole-manager-sidebar.component.scss'],
-  styles: [`.router-link-active { background-color: #19B3D3; }`]
+  styles: [`.router-link-active { background-color: #6f94b3; }`]
 
 })
 export class PoleManagerSidebarComponent implements OnInit {
@@ -17,6 +17,7 @@ export class PoleManagerSidebarComponent implements OnInit {
   ngOnInit() {
     this.getCredentials();
   }
+  
   getCredentials(){
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     this.firstname = currentUser["user"]["firstname"];

@@ -1,13 +1,13 @@
 <mat-nav-list>
   <div class="logo py-4">
     <a routerLink="admin/welcomepage">
-      <img src="./assets/images/logo-Proxym.png" alt="Company Logo" height="70px" />
+      <img src="./assets/images/Logo-Proxym-2020-white-03.png" alt="Company Logo" height="70px" />
     </a>
   </div>
   <mat-divider></mat-divider>
   <div class="user-panel">
     <div class=" image">
-      <img src="userImg" class="profile_image" alt="User Image" />
+      <img src="../../../assets/images/user/user.png" class="profile_image" alt="User Image" />
     </div>
   </div>
   <h2 class="user-name">{{firstname}} {{lastname}}</h2>
@@ -17,11 +17,11 @@
       <i class="material-icons">person_add</i><span>Add user</span>
     </a>
 
-    <a [routerLinkActive]="['router-link-active']"routerLink="admin/addpole">
+    <a [routerLinkActive]="['router-link-active']" routerLink="admin/addpole">
       <i class="material-icons">location_city</i> <span>Add pole</span>
     </a>
 
-    <a [routerLinkActive]="['list-item-active']" routerLink="admin/allpoles">
+    <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpoles">
       <i class="material-icons">people</i><span>All poles</span>
     </a>
     <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpolemanagers"><i class="material-icons">people</i> <span>All pole managers</span></a>

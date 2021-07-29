@@ -22,6 +22,7 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Latest Projects</th>
+                                <th>With holding Status</th>
                                 <th>Work Status</th>
                                 <th>Edit</th>
                             </tr>
@@ -34,10 +35,10 @@
                                 <td>{{developer.telNum}}</td>
                                 <td>{{developer.email}}</td>
                                 <td>{{developer.adress}}</td>
-                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects": listProjectByDeveloper(developer.projects)}}
-                                
+                                <td>{{developer.projects[0]==undefined ? "doesn't have projects": listProjectByDeveloper(developer.projects)}}
                                 </td>
-                                <td>{{toString(developer.userStatus)}}</td>
+                                <td>{{toStringWithHolding(developer.withHoldingType)}}</td>
+                                <td>{{toStringStatus(developer.userStatus)}}</td>
                                 <td>
                                     <button type="button" class="btn btn-outline-info" id="edit-button-style"
                                         (click)="onEdit(developer.id)">

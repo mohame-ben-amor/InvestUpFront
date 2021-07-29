@@ -58,12 +58,10 @@ export class PlanificationComponent implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             this.success = "Your request has been sent successfuly ";
             this.form.reset();
           },
           (errorMessage) => {
-            console.log("Details Error " + errorMessage["error"]["message"]);
             this.error = errorMessage;
           }
         );

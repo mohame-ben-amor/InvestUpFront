@@ -42,4 +42,63 @@ export class PoleService {
             })
         })
     }
+
+    filterById(id: number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_ENDPOINT + `/filterById/${id}`;
+        return this.http.get<Pole>(url, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+    }
+
+    updatePolecapacity(id: number, capacity: number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_ENDPOINT + `/update/capacity/${id}/${capacity}`;
+        return this.http.patch<Pole>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+
+    }
+    
+    updatePoledescription(id: number, description: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_ENDPOINT + `/update/description/${id}/${description}`;
+        return this.http.patch<Pole>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+
+    }
+
+    updatePolename(id: number, name: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_ENDPOINT + `/update/name/${id}/${name}`;
+        return this.http.patch<Pole>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+    }
+
+    updatePolereserved(id: number, reserved: number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.POLE_ENDPOINT + `/update/reserved/${id}/${reserved}`;
+        return this.http.patch<Pole>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+    }
+
 }
+

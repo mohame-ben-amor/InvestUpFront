@@ -1,6 +1,7 @@
 import { UpperCasePipe } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Planification } from "../models/planification";
 import { UserStatus } from "../models/userStatus";
 import { Constants } from "../utils/constants";
 
@@ -31,6 +32,28 @@ export class HistoriqueService {
                     headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
                 }
             );
+    }
+
+    getAll() {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.HISTORIQUE_ENDPOINT + '/findAll';
+        return this.http.get<Planification[]>(url, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
+    }
+
+    updatePoleManagerDecision(idHistorique: number, idDeveloper: number, decision: string) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+        let url = Constants.APP_PORT + Constants.HISTORIQUE_ENDPOINT + `/update/decisionPoleManager/${idHistorique}/${idDeveloper}/${decision}`;
+        return this.http.patch<Planification>(url, null, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        });
     }
 
     toEnum(value: string): string {

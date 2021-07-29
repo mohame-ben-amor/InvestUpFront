@@ -24,6 +24,17 @@ export class PoleManagerService {
         })
     }
 
+    getById(idPoleManager:number) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        this.token = currentUser["accessToken"];
+
+        return this.http.get<PoleManager>(Constants.APP_PORT + Constants.POLE_MANAGER_ENDPOINT +  `/filterById/${idPoleManager}`, {
+            headers: new HttpHeaders({
+                "Authorization": 'Bearer ' + this.token
+            })
+        })
+    }
+
     editWithHoldingType(id: number, optionalWithHoldingType: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];

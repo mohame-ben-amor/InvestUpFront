@@ -14,7 +14,7 @@ export class Developer {
     userStatus: UserStatus;
     presential:number;
     remote:number;
-    withHoldingStatus: WithHoldingStatus;
+    withHoldingType: WithHoldingStatus;
     role: Role;
     projects: Project[];
     historiques:Planification[];

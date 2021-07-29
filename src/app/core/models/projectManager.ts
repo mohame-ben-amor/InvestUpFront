@@ -1,3 +1,4 @@
+import { Project } from "./project";
 import { Role } from "./role";
 import { UserStatus } from "./userStatus";
 import { WithHoldingStatus } from "./withHoldingStatus";
@@ -14,6 +15,6 @@ export class ProjectManager{
     remote:number;
     withHoldingStatus: WithHoldingStatus;
     role: Role;
-    projects: string[];
+    projects: Project[];
 
 } 

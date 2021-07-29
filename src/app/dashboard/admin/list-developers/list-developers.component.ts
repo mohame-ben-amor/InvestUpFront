@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
+import { Project } from 'src/app/core/models/project';
 import { WithHoldingStatus } from 'src/app/core/models/withHoldingStatus';
 import { DeveloperService } from 'src/app/core/service/developers.service';
 import { PopUpDevelopersComponent } from './pop-up-developers/pop-up-developers.component';
@@ -82,5 +83,13 @@ export class ListDevelopersComponent implements OnInit {
   checkRole() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     this.role = currentUser["user"]["role"]["roleName"];
+  }
+
+  listProjectByDeveloper(projects : Project[]):string{
+    let output = projects[0].name;
+    for (let i=1;i<projects.length;i++){
+      output = output+", "+projects[i].name;
+    }
+    return output;
   }
 }

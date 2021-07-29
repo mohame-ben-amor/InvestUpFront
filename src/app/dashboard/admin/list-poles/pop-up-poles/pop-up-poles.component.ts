@@ -55,7 +55,6 @@ export class PopUpPolesComponent implements OnInit {
     let poleManager = this.editForm.value.poleManager;
     console.log("id New Pole manager : " + poleManager);
     console.log("id pole : " + this.idPole);
-    //API change status here !! 
     this.poleService.updatePoleManager(+this.idPole, poleManager).subscribe(
       (result) => {
 
@@ -109,17 +108,27 @@ export class PopUpPolesComponent implements OnInit {
     this.poleService.delete(+this.idPole).subscribe(
       (res) => {
         if (res) {
-          console.log("Your request has been sent successfuly ");
-          //return this.success = "Your request has been sent successfuly ";
+           this.success = "Your request has been sent successfuly ";
+          setTimeout(() => {
+            this.editForm.reset();
+            this.dialogRef.close();
+          }, 300)
+          this.removeLocalStorage();
+          let currentUrl = this.route.url;
+          this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.route.onSameUrlNavigation = 'reload';
+          this.route.navigate([currentUrl])
+
         }
       },
       (error) => {
-        console.log("Error : " + error["error"]["message"]);
-        //this.error = error;
+        this.error = error["statusText"]=="Unknown Error" ? "Please check your networking":error["error"]["message"];
+        let currentUrl = this.route.url;
+        this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.route.onSameUrlNavigation = 'reload';
+        this.route.navigate([currentUrl])
       }
     );
-    this.removeLocalStorage();
-    this.dialogRef.close();
   }
 
   getAllPoleManagers() {

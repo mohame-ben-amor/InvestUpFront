@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Developer } from "../models/developer";
 import { Project } from "../models/project";
+import { ProjectManager } from "../models/projectManager";
 import { WithHoldingStatus } from "../models/withHoldingStatus";
 import { Constants } from "../utils/constants";
 
@@ -17,7 +18,7 @@ export class ProjectService {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
 
-        return this.http.get<Project[]>(Constants.APP_PORT + Constants.PROJECT_ENDPOINT + "/findAll", {
+        return this.http.get<ProjectManager[]>(Constants.APP_PORT + Constants.PROJECT_MANAGER_ENDPOINT + "/findAll", {
             headers: new HttpHeaders({
                 "Authorization": 'Bearer ' + this.token
             })

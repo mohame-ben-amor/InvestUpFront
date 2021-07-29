@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Developer } from 'src/app/core/models/developer';
 import { Planification } from 'src/app/core/models/planification';
+import { Project } from 'src/app/core/models/project';
 import { UserStatus } from 'src/app/core/models/userStatus';
 import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 import { PopUpComponent } from './pop-up/pop-up.component';
@@ -74,6 +75,14 @@ export class MyTeamsComponent implements OnInit {
     }
   }
 
+  listProjectByDeveloper(projects : Project[]):string{
+    let output = projects[0].name;
+    for (let i=1;i<projects.length;i++){
+      output = output+", "+projects[i].name;
+    }
+    return output;
+  }
+  
   toString(value: string): string {
     switch (value) {
       case "NOT_DEFINED":

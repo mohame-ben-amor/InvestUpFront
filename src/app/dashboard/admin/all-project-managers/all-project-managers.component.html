@@ -28,23 +28,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let project of projects">
+                            <tr *ngFor="let projectManager of projectManagers">
                                 <td>
-                                    {{project.projectManager.firstname}} {{project.projectManager.lastname}}
+                                    {{projectManager.firstname}} {{projectManager.lastname}}
                                 </td>
-                                <td>{{project.projectManager.telNum}}</td>
-                                <td>{{project.projectManager.email}}</td>
-                                <td>{{project.projectManager.adress}}</td>
-                                <td>{{project.name ==undefined ? "doesn't have projects":project.name}}
-                                <td>{{project.projectManager.userStatus}}</td>
-                                <td>{{toString(project.projectManager.withHoldingType)}}</td>
+                                <td>{{projectManager.telNum}}</td>
+                                <td>{{projectManager.email}}</td>
+                                <td>{{projectManager.adress}}</td>
+                                <td>{{projectManager.projects[0] ==undefined ? "doesn't have projects":listProjectsByProjectManager(projectManager.projects)}}
+                                <td>{{projectManager.userStatus}}</td>
+                                <td>{{toString(projectManager.withHoldingType)}}</td>
                                 <td *ngIf="role =='Admin'">
                                     <button type="button" class="btn btn-outline-info" id="edit-button-style"
-                                        (click)="onEdit(project.projectManager.id)">
+                                        (click)="onEdit(projectManager.id)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
                                     <button type="button" class="btn btn-outline-danger" id="delete-button-style"
-                                        (click)="onDelete(project.projectManager.id,project.projectManager.firstname,project.projectManager.lastname)">
+                                        (click)="onDelete(projectManager.id,projectManager.firstname,projectManager.lastname)">
                                         <mat-icon>delete_forever</mat-icon>
                                     </button>
                                 </td>

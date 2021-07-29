@@ -40,6 +40,7 @@ export class AllDevelopersComponent implements OnInit {
   getAll() {
     this.developerService.getAll().subscribe(
       developers => {
+        console.log(developers);
         this.developers = developers;
       });
   }
@@ -52,7 +53,7 @@ export class AllDevelopersComponent implements OnInit {
     return output;
   }
   
-  toString(value: string): string {
+  toStringStatus(value: string): string {
     switch (value) {
       case "NOT_DEFINED":
         return UserStatus.NOT_DEFINED;
@@ -61,6 +62,19 @@ export class AllDevelopersComponent implements OnInit {
 
       case "REMOTE":
         return UserStatus.REMOTE;
+    }
+  }
+
+  toStringWithHolding(value: string): string {
+    switch (value) {
+      case "NONE":
+        return WithHoldingStatus.NONE;
+      case "SICK_DAYS":
+        return WithHoldingStatus.SICK_DAYS;
+      case "IN_VACATION":
+        return WithHoldingStatus.IN_VACATION;
+        case "SUSPENSION":
+        return WithHoldingStatus.SUSPENSION
     }
   }
 

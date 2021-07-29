@@ -18,25 +18,29 @@
             <thead>
               <tr>
                 <th>Developer Name</th>
-                <th>Starting date</th>
-                <th>Deadline</th>
+
                 <th>Project Manager Decision</th>
                 <th>Pole Manager Decision</th>
+                <th>Starting date</th>
+                <th>Deadline</th>
                 <th>Edit Your Decision</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let history of histories">
-                <td>
-                  {{history.developerName}}
-                </td>
-                <td>{{history.startingDate}}</td>
-                <td>{{history.deadline}}</td>
-                <td>{{history.projectManagerDecision}}</td>
-                <td>{{history.poleManagerDecision}}</td>
+              <tr *ngFor="let developer of developers">
+
+                <td>{{developer.firstname}} {{developer.lastname}}</td>
+                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification":
+                  toStringValue(getLastItemInTable(developer.historiques).projectManagerDecision)}}</td>
+                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification":
+                  toStringValue(getLastItemInTable(developer.historiques).poleManagerDecision)}}</td>
+                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification":
+                  getLastItemInTable(developer.historiques).startingDate}}</td>
+                <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification" :
+                  getLastItemInTable(developer.historiques).deadline}} </td>
                 <td>
                   <button type="button" class="btn btn-outline-info" id="edit-button-style"
-                    (click)="onEdit(history.id)">
+                    (click)="onEdit(getLastItemInTable(developer.historiques).id,developer.id)">
                     <mat-icon>edit</mat-icon>
                   </button>
                 </td>
@@ -45,9 +49,6 @@
           </table>
         </div>
       </div>
-
     </div>
-
-
   </div>
 </div>

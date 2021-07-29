@@ -33,10 +33,7 @@
                                 <td>{{developer.telNum}}</td>
                                 <td>{{developer.email}}</td>
                                 <td>{{developer.adress}}</td>
-                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects":null}}
-                                    <select id="select2" *ngFor="let item of developer.projects">
-                                        <option>{{item.name}}</option>
-                                    </select>
+                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects": listProjectByDeveloper(developer.projects)}}
                                 <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": toString(getLastItemInTable(developer.historiques).projectManagerDecision)}}</td>
                                 <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": toString(getLastItemInTable(developer.historiques).poleManagerDecision)}}</td>
                                 <td>{{getLastItemInTable(developer.historiques)==undefined ? "doesn't have planification": getLastItemInTable(developer.historiques).startingDate}}</td>

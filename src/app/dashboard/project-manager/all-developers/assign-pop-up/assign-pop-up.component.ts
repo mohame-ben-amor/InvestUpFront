@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/core/models/project';
+import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 import { ProjectService } from 'src/app/core/service/project.service';
 
 @Component({
@@ -15,14 +16,18 @@ export class AssignPopUpComponent implements OnInit {
   createForm: FormGroup;
   projects: Project[] = [];
   idDeveloper = "";
+  idProjectManager ="";
   success = "";
   error = "";
 
   constructor(public dialogRef: MatDialogRef<AssignPopUpComponent>,
     private projectService: ProjectService,
+    private projectManagerService:ProjectManagerService,
     private route: Router) { }
 
   ngOnInit(): void {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    this.idProjectManager = currentUser["user"]["id"];
     this.idDeveloper = localStorage.getItem("idDeveloper");
     this.initCreateForm();
     this.getAllProjects();
@@ -63,7 +68,8 @@ export class AssignPopUpComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.projectService.getAll().subscribe(
+
+    this.projectManagerService.getAllProjectsByProjectManager(+this.idProjectManager).subscribe(
       (res) => {
         this.projects = res;
       }

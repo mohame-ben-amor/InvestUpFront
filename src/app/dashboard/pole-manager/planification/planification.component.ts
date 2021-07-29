@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Developer } from 'src/app/core/models/developer';
+import { Planification } from 'src/app/core/models/planification';
+import { DeveloperService } from 'src/app/core/service/developers.service';
 import { PopUpPlanificationComponent } from './pop-up-planification/pop-up-planification.component';
 
 @Component({
@@ -10,37 +13,20 @@ import { PopUpPlanificationComponent } from './pop-up-planification/pop-up-plani
 })
 export class PlanificationComponent implements OnInit {
 
-
   closeResult: string;
   editForm: FormGroup;
-  idHistory :number;
+  idHistory: number;
   displayEditPopUp = '';
+  histories: History[] = [];
+  developers: Developer[] = [];
+  objIndex: any;
+  decision = '';
 
-  objIndex : any;
-  decision = '' ;
-  histories = [
-    {
-      id: 1,
-      developerName: 'rayen',
-      startingDate: '09-09-2021',
-      deadline: '10-10-2021',
-      projectManagerDecision: 'projectManagerDecision1',
-      poleManagerDecision: 'poleManagerDecision1'
-    },
-    {
-      id: 2,
-      developerName: 'mohamed',
-      startingDate: '02-02-2021',
-      deadline: '03-03-2021',
-      projectManagerDecision: 'projectManagerDecision2',
-      poleManagerDecision: 'poleManagerDecision2'
-      },
-    ] ;
+  constructor(private dialog: MatDialog,
+    private developerService: DeveloperService
+  ) { }
 
-  constructor(private dialog: MatDialog) {
-    
-   }
-   onCreate() {
+  onCreate() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
@@ -48,26 +34,51 @@ export class PlanificationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.getAll();
     this.decision = localStorage.getItem('decision');
     this.idHistory = +localStorage.getItem('idHistory');
-    console.log(this.histories);
 
-    this.objIndex = this.histories.findIndex((obj => obj.id == +this.idHistory));
-    this.histories[this.objIndex].poleManagerDecision = this.decision;
-    console.log(this.histories);
-    
+    this.developers.forEach(function (value) {
+      console.log(value);
+    });
+  }
+
+  getLastItemInTable(planification: Planification[]): Planification {
+    const size = planification.length;
+    if (size == 0) {
+      return planification[0]
+    } else {
+      return planification[size - 1];
+    }
   }
   
-  onEdit(id: number) {
-    console.log("id History from edit button: " + id);
-    console.log(this.histories[id-1].poleManagerDecision);
-    this.idHistory = id;
+  getAll() {
+    this.developerService.getAll().subscribe((res) => {
+      this.developers = res;
+      console.log(this.developers);
+    });
+    setTimeout(() => {
+    }, 300)
+  }
+
+  onEdit(HistoryId: number, developerId: number) {
     this.displayEditPopUp = 'true';
-    localStorage.setItem('idHistory', this.idHistory.toString());
+    localStorage.setItem('developerId', developerId.toString());
+    localStorage.setItem('historyId', HistoryId.toString());
     localStorage.setItem('displayEditPopUp', this.displayEditPopUp);
-    console.log(this.idHistory);
     this.onCreate()
+  }
+
+  toStringValue(value: string): string {
+    switch (value) {
+      case "NOT_DEFINED":
+        return "Not defined";
+      case "PRESENTIAL":
+        return "Presential";
+      case "REMOTE":
+        return "Remote";
+    }
+
   }
 
 }

@@ -35,10 +35,8 @@
                                 <td>{{developer.telNum}}</td>
                                 <td>{{developer.email}}</td>
                                 <td>{{developer.adress}}</td>
-                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects":null}}
-                                <select *ngFor="let item of developer.projects">
-                                    <option>{{item.name}}</option>
-                                </select>
+                                <td>{{ developer.projects[0]==undefined ? "doesn't have projects":
+                                    listProjectByDeveloper(developer.projects)}}
                                 </td>
                                 <td>{{developer.userStatus}}</td>
                                 <td>{{toString(developer.withHoldingType)}}</td>
