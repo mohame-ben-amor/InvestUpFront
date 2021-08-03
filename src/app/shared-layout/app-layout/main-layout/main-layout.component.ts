@@ -22,7 +22,7 @@ export class MainLayoutComponent implements OnInit {
 
   checkRole() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    this.role = currentUser["user"]["role"]["roleName"];
+    this.role = currentUser["user"]["role"];
   }
 
 }

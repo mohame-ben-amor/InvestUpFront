@@ -8,15 +8,11 @@ import { AuthGuard } from './core/auth-guard.service';
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent,
-    //redirectTo: '/authentication/sign-in', pathMatch: 'full',
     children: [
       { path: '', redirectTo: '/authentication/sign-in', pathMatch: 'full' },
 
     ]
    },
-    //{path:'authentication/sign-up',canActivate : [AuthGuard], component: SignUpComponent},
-    //{path:'authentication/sign-in', component: SignInComponent},
-    //{path: 'authentication/forgot-password', component:ForgotPasswordComponent},
   {
     path: 'authentication', component: AuthLayoutComponent,
     loadChildren: () =>

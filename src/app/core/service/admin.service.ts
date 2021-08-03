@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, tap } from "rxjs/operators";
 import { User } from "../models/user";
-import { UserStatus } from "../models/userStatus";
-import { WithHoldingStatus } from "../models/withHoldingStatus";
 import { Constants } from "../utils/constants";
 
 @Injectable({
@@ -22,11 +20,7 @@ export class AdminService {
         lastname: string,
         password: string,
         role: string,
-        telNum: string,
-        userStatusParam: UserStatus,
-        withHoldingTypeParam: WithHoldingStatus) {
-        let userStatus = this.upperCaseTransformer(userStatusParam);
-        let withHoldingType = this.upperCaseTransformer(withHoldingTypeParam);
+        telNum: string,) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["accessToken"];
         //<User> c'est le type de retour de l'API
@@ -34,7 +28,7 @@ export class AdminService {
         return this.http
             .post(Constants.APP_PORT + Constants.USER_ENDPOINT + "/create",
                 {
-                    adress, email, firstname, lastname, password, role, telNum, userStatus, withHoldingType
+                    adress, email, firstname, lastname, password, role, telNum
                 },
                 {
                     headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)

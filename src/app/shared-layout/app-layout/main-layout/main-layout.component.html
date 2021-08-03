@@ -1,9 +1,9 @@
 <mat-drawer-container>
   <mat-drawer mode="side" [opened]="sideBarOpen">
 
-    <app-sidebar *ngIf="role=='Admin' || role=='Developer'"></app-sidebar>
-    <app-project-manager-sidebar *ngIf="role=='Project Manager'"></app-project-manager-sidebar>
-    <app-pole-manager-sidebar *ngIf="role=='Pole Manager'"></app-pole-manager-sidebar>
+    <app-sidebar *ngIf="role=='Admin'" ></app-sidebar>
+    <app-sidebar-entrepreneur *ngIf="role=='Entrepreneur'"></app-sidebar-entrepreneur>
+    <app-sidebar-investor *ngIf="role=='Investor'"></app-sidebar-investor>
 
   </mat-drawer>
   <mat-drawer-content>

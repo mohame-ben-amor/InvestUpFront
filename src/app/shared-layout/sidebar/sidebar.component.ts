@@ -15,8 +15,7 @@ export class SidebarComponent implements OnInit {
   }
   getCredentials(){
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    this.firstname = currentUser["user"]["firstname"];
-    this.lastname=currentUser["user"]["lastname"];
+    this.firstname = currentUser["user"]["name"];
   }
 
 }

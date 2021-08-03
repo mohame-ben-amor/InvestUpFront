@@ -11,6 +11,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SidebarComponent } from './shared-layout/sidebar/sidebar.component';
+import { SidebarInvestorComponent } from './shared-layout/sidebar-investor/sidebar-investor.component';
+import { SidebarEntrepreneurComponent } from './shared-layout/sidebar-entrepreneur/sidebar-entrepreneur.component';
+
 import { HeaderComponent } from './shared-layout/header/header.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,11 +31,8 @@ import { AuthLayoutComponent } from './shared-layout/app-layout/auth-layout/auth
 import { MainLayoutComponent } from './shared-layout/app-layout/main-layout/main-layout.component';
 import { AuthGuard } from './core/auth-guard.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProjectManagerSidebarComponent } from './shared-layout/project-manager-sidebar/project-manager-sidebar.component';
-import { PoleManagerSidebarComponent } from './shared-layout/pole-manager-sidebar/pole-manager-sidebar.component';
 import { UpperCasePipe } from '@angular/common';
 import { SettingsPopUpComponent } from './shared-layout/header/settings-pop-up/settings-pop-up.component';
-import { AssignPopUpComponent } from './dashboard/project-manager/all-developers/assign-pop-up/assign-pop-up.component';
 
 
 @NgModule({
@@ -42,9 +42,9 @@ import { AssignPopUpComponent } from './dashboard/project-manager/all-developers
     MainLayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    ProjectManagerSidebarComponent,
-    PoleManagerSidebarComponent,
     SettingsPopUpComponent,
+    SidebarInvestorComponent,
+    SidebarEntrepreneurComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +78,7 @@ import { AssignPopUpComponent } from './dashboard/project-manager/all-developers
   exports: [Material.MatDialogModule],
   providers: [AuthGuard,UpperCasePipe],
   bootstrap: [AppComponent],
-  entryComponents:[SettingsPopUpComponent,AssignPopUpComponent]
+  entryComponents:[SettingsPopUpComponent]
 
 })
 export class AppModule { }

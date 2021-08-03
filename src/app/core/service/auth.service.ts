@@ -11,37 +11,41 @@ import { Constants } from "../utils/constants";
 })
 export class AuthService {
 
-  private currentUserSubject: BehaviorSubject<{ "accessToken": string, "user": User }>;
+  private currentUserSubject: BehaviorSubject<{ "token": string, "user": User }>;
   //public currentUser: Observable<{ "accessToken": string, "user": User }>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<{ "accessToken": string, "user": User }>(
+    this.currentUserSubject = new BehaviorSubject<{ "token": string, "user": User }>(
       JSON.parse(localStorage.getItem('currentUser'))
     );
 
     //  this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get getCurrentUserValue(): { "accessToken": string, "user": User } {
+  public get getCurrentUserValue(): { "token": string, "user": User } {
     return this.currentUserSubject.value;
   }
-
   login(email: string, password: string) {
-    return this.http
-      .post<any>(Constants.APP_PORT + Constants.LOGIN_ENDPOINT + "/login", {
-        email,
-        password
-      })
+    return this.http.post<any>('http://127.0.0.1:8000/api/user/login', {
+      email,
+      password
+    })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.clear();
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          console.log(localStorage.getItem('currentUser'));
           return user;
         })
       );
+    /*
+   this.http
+    .post<any>(Constants.APP_PORT + "user/login", {
+      email,
+      password
+    })*/
+
   }
 
   logout() {

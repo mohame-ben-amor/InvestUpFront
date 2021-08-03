@@ -1,17 +1,16 @@
-import { Role } from './role';
-import { UserStatus } from './userStatus';
-import { WithHoldingStatus } from './withHoldingStatus';
+
 
 export class User {
   id: number;
-  firstname: string;
-  lastname: string;
+  name: string;
   email: string;
-  role: Role;
-  telNum:string;
-  adress:string;
-  userStatus:UserStatus;
-  presential : number;
-  remote : number ;
-  withHoldingType:WithHoldingStatus;
+  role: string;
+  created_at : Date;
+  updated_at : Date;
+  sexe:string;
+  birthday:Date;
+  adresse : string;
+  profile : string ;
+  picture : string ;
+  password : string;
 }

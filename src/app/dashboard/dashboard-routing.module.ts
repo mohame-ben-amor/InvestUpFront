@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { ProjectManagerComponent } from './project-manager/project-manager.component';
 const routes: Routes = [
 
   {
@@ -15,16 +14,14 @@ const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdmindModule),
   },
   {
-    path: 'projectmanager',
-    component: ProjectManagerComponent,
+    path: 'investor',
     loadChildren: () =>
-      import('./project-manager/project-manager.module').then((m) => m.ProjectManagerModule),
+      import('./investor/invertor.module').then((m) => m.InvestorModule),
   },
   {
-    path: 'polemanager',
-    component: ProjectManagerComponent,
+    path: 'entrepreneur',
     loadChildren: () =>
-      import('./pole-manager/pole-manager.module').then((m) => m.PoleManagerdModule),
+      import('./entrepreneur/entrepreneur.module').then((m) => m.EntrepreneurModule),
   },
   /**
    * complete your paths!

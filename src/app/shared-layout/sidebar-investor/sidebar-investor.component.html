@@ -1,0 +1,27 @@
+<mat-nav-list>
+    <div class="logo py-4">
+      <a routerLink="admin/welcomepage">
+        <img src="./assets/images/anypli-logo.png" alt="Company Logo" height="70px" />
+      </a>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="user-panel">
+        <img src="../../../assets/images/user/user.png" class="profile_image" alt="User Image" />
+    </div>
+    <h2 class="user-name">{{name}}</h2>
+    <div class="sidebarr">
+      <a [routerLinkActive]="['router-link-active']"
+        routerLink="admin/adduser">
+        <i class="material-icons">people</i><span>All Entrepreneur</span>
+      </a>
+  
+      <a [routerLinkActive]="['router-link-active']" routerLink="admin/addpole">
+        <i class="material-icons">people</i> <span>All Investor</span>
+      </a>
+  
+      <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpoles">
+        <i class="material-icons">location_city</i><span>Projects</span>
+      </a>
+    </div>
+  
+  </mat-nav-list>

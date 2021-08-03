@@ -1,39 +1,28 @@
 <mat-nav-list>
   <div class="logo py-4">
     <a routerLink="admin/welcomepage">
-      <img src="./assets/images/Logo-Proxym-2020-white-03.png" alt="Company Logo" height="70px" />
+      <img src="./assets/images/anypli-logo.png" alt="Company Logo" height="70px" />
     </a>
   </div>
   <mat-divider></mat-divider>
   <div class="user-panel">
-    <div class=" image">
       <img src="../../../assets/images/user/user.png" class="profile_image" alt="User Image" />
-    </div>
+
   </div>
   <h2 class="user-name">{{firstname}} {{lastname}}</h2>
   <div class="sidebarr">
     <a [routerLinkActive]="['router-link-active']"
       routerLink="admin/adduser">
-      <i class="material-icons">person_add</i><span>Add user</span>
+      <i class="material-icons">people</i><span>All Entrepreneur</span>
     </a>
 
     <a [routerLinkActive]="['router-link-active']" routerLink="admin/addpole">
-      <i class="material-icons">location_city</i> <span>Add pole</span>
+      <i class="material-icons">people</i> <span>All Investor</span>
     </a>
 
     <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpoles">
-      <i class="material-icons">people</i><span>All poles</span>
+      <i class="material-icons">location_city</i><span>Projects</span>
     </a>
-    <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpolemanagers"><i class="material-icons">people</i> <span>All pole managers</span></a>
-    <a [routerLinkActive]="['router-link-active']"routerLink="admin/allprojectmanagers"><i class="material-icons">people</i> <span>All project managers</span></a>
-    <a [routerLinkActive]="['router-link-active']" routerLink="admin/alldevelopers"><i class="material-icons">people</i> <span>All developers</span></a>
-    <a [routerLinkActive]="['router-link-active']" routerLink="admin/allusers"><i class="material-icons">people</i> <span>All collaborators</span></a>
-
-    <!--  <a><i class="material-icons">people</i> <span>Collaborators working :</span></a>
-
-    <a href="#" class="submenu"> <span>Home</span></a>
-    <a href="#" class="submenu"><span>Presential</span></a>
-    -->
   </div>
 
 </mat-nav-list>

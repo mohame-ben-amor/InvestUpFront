@@ -3,9 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/service/auth.service';
 import { User } from 'src/app/core/models/user';
-import { RoleEnum } from 'src/app/core/models/roleEnum';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ContactPopUpComponent } from './contact-pop-up/contact-pop-up.component';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -18,13 +19,14 @@ export class SignInComponent implements OnInit {
   submitted = false;
   error = '';
   hide = true;
-  currentUser: { "accessToekn": "", "user": User };
+  currentUser: { "token": "", "user": User };
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authService: AuthService,
     private dialog: MatDialog,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -39,47 +41,69 @@ export class SignInComponent implements OnInit {
   }
 
   onSubmit() {
+
+    console.log(this.authForm.getRawValue());
+    const email = this.formValue.email.value;
+    const password = this.formValue.password.value;
     this.submitted = true;
     this.error = '';
-
-    if (this.authForm.invalid) {
-      return;
-    } else {
-      this.authService
-        .login(this.formValue.email.value, this.formValue.password.value)
-        .subscribe(
-          (res) => {
-            if (res) {
-              //***** Method 1 from the localStorage direct ********** 
-              //this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
-              //console.log("token: " + this.currentUser["accessToken"]);
-              //const role = this.currentUser["user"]["role"]["roleName"];
-              //console.log("Role : " + role);
-
-              // ****** method 2 from the localStorage but using a inter method ***
-              console.log("Token second method boy : " + this.authService.getCurrentUserValue.accessToken);
-              console.log(this.authService.getCurrentUserValue.user.role.roleName);
-              const accesToken = this.authService.getCurrentUserValue.accessToken;
-              const role = this.authService.getCurrentUserValue.user.role.roleName;
-              
-              if (role === RoleEnum.ADMIN) {
-                this.router.navigate(['/dashboard/admin']);
-              } else if (role === RoleEnum.POLE_MANAGER) {
-                this.router.navigate(['/dashboard/polemanager']);
-              } else if (role === RoleEnum.PROJECT_MANAGER) {
-                this.router.navigate(['/dashboard/projectmanager']);
-              } else if (role === RoleEnum.DEVELOPER) {
-                this.router.navigate(['/dashboard/developer']);
+    this.authService.login(email,password).subscribe((res) => {
+      
+      if (res) {
+        const accesToken = this.authService.getCurrentUserValue.token;
+        const role = this.authService.getCurrentUserValue.user.role;
+        if (role === "Investor") {
+          this.router.navigate(['/dashboard/investor']);
+        } else if (role === "Entrepreneur") {
+          this.router.navigate(['/dashboard/entrepreneur']);
+        } else if (role === "Admin") {
+          this.router.navigate(['/dashboard/admin']);
+        } 
+        console.log(res);
+      }
+    },
+      (err) => {
+        console.log(err);
+      });
+    /*
+        if (this.authForm.invalid) {
+          return;
+        } else {
+          this.authService
+            .login(this.formValue.email.value, this.formValue.password.value)
+            .subscribe(
+              (res) => {
+                if (res) {
+                  //***** Method 1 from the localStorage direct ********** 
+                  //this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                  //console.log("token: " + this.currentUser["accessToken"]);
+                  //const role = this.currentUser["user"]["role"]["roleName"];
+                  //console.log("Role : " + role);
+    
+                  // ****** method 2 from the localStorage but using a inter method ***
+                  console.log("Token second method boy : " + this.authService.getCurrentUserValue.token);
+                  //console.log(this.authService.getCurrentUserValue.user.role.roleName);
+                  const accesToken = this.authService.getCurrentUserValue.token;
+                  const role = this.authService.getCurrentUserValue.user.role.roleName;
+                  
+                  if (role === RoleEnum.ADMIN) {
+                    this.router.navigate(['/dashboard/admin']);
+                  } else if (role === RoleEnum.POLE_MANAGER) {
+                    this.router.navigate(['/dashboard/polemanager']);
+                  } else if (role === RoleEnum.PROJECT_MANAGER) {
+                    this.router.navigate(['/dashboard/projectmanager']);
+                  } else if (role === RoleEnum.DEVELOPER) {
+                    this.router.navigate(['/dashboard/developer']);
+                  }
+                }
+              },
+              (error) => {
+                console.log(error["error"]["message"]);
+                this.submitted = false;
+                return this.error = error;
               }
-            }
-          },
-          (error) => {
-            console.log(error["error"]["message"]);
-            this.submitted = false;
-            return this.error = error;
-          }
-        );
-    }
+            );
+        }*/
     console.log(this.formValue.email.value, this.formValue.password.value);
   }
   onCreate() {

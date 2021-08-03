@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/core/service/admin.service';
-import { PoleManagerService } from 'src/app/core/service/pole-manager.service';
-import { ProjectManagerService } from 'src/app/core/service/project-manager.service';
 
 @Component({
   selector: 'app-settings-pop-up',
@@ -21,9 +19,7 @@ export class SettingsPopUpComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<SettingsPopUpComponent>,
     private route: Router,
-    private adminService: AdminService,
-    private poleManagerService : PoleManagerService,
-    private projectManagerService : ProjectManagerService) { }
+    private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getCredentials();
@@ -50,60 +46,7 @@ export class SettingsPopUpComponent implements OnInit {
     let newPassword = "";
     oldPassword = this.editForm.value.oldPassword;
     newPassword = this.editForm.value.newPassword;
-    if (this.role == "Admin") {
-      this.adminService.updatePassword(oldPassword, newPassword, this.token).subscribe(
-        (res) => {
-          if (res) {
-            this.success = "Your request has been sent successfuly ";
-            setTimeout(() => {
-              this.editForm.reset();
-              this.dialogRef.close();
-            }, 300)
-            this.reloadPage();
-          }
-        },
-        (error) => {
-          this.error = error["error"]["message"];
-          this.reloadPage();
-        }
-      );
-    }
-    if (this.role == "Project Manager") {
-      this.projectManagerService.updatePassword(oldPassword, newPassword, this.token).subscribe(
-        (res) => {
-          if (res) {
-            this.success = "Your request has been sent successfuly ";
-            setTimeout(() => {
-              this.editForm.reset();
-              this.dialogRef.close();
-            }, 300)
-            this.reloadPage();
-          }
-        },
-        (error) => {
-          this.error = error["error"]["message"];
-          this.reloadPage();
-        }
-      );
-    }
-    if (this.role == "Pole Manager") {
-      this.poleManagerService.updatePassword(oldPassword, newPassword, this.token).subscribe(
-        (res) => {
-          if (res) {
-            this.success = "Your request has been sent successfuly ";
-            setTimeout(() => {
-              this.editForm.reset();
-              this.dialogRef.close();
-            }, 300)
-            this.reloadPage();
-          }
-        },
-        (error) => {
-          this.error = error["error"]["message"];
-          this.reloadPage();
-        }
-      );
-    }
+    
   }
 
   getCredentials() {

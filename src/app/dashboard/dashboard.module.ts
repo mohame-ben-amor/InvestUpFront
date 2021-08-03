@@ -14,13 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { ProjectManagerComponent } from './project-manager/project-manager.component';
-import { PoleManagerComponent } from './pole-manager/pole-manager.component';
+import { InvestorComponent } from './investor/investor.component';
+import { EntrepreneurComponent } from './entrepreneur/entrepreneur.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    ProjectManagerComponent,
-    PoleManagerComponent,
+    InvestorComponent,
+    EntrepreneurComponent,
   ],
   imports: [
     CommonModule,
