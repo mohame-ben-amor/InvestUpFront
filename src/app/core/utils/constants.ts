@@ -1,6 +1,6 @@
 export enum Constants {
 
-    APP_PORT = "http://localhost:8000/api/",
+    APP_PORT = "http://127.0.0.1:8000/api/",
 
     USER_ENDPOINT = "telework/api/user",
 

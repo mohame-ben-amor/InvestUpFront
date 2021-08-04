@@ -1,8 +1,7 @@
 import { UpperCasePipe } from "@angular/common";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { map, tap } from "rxjs/operators";
-import { User } from "../models/user";
+import {  tap } from "rxjs/operators";
 import { Constants } from "../utils/constants";
 
 @Injectable({

@@ -17,10 +17,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Material from "@angular/material";
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
-  ],
+  EditProfileComponent],
   imports: [
     CommonModule,
     InvestorRoutingModule,
@@ -38,7 +39,9 @@ import * as Material from "@angular/material";
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatDatepickerModule,
+    Material.MatNativeDateModule
   ],
   exports: [Material.MatDialogModule
   ],
