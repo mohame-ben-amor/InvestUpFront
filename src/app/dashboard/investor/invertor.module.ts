@@ -17,9 +17,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Material from "@angular/material";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
+
+import { ProjectsComponent } from './projects/projects.component';
 @NgModule({
   declarations: [
+    ProjectsComponent
   ],
   imports: [
     CommonModule,
@@ -35,12 +39,20 @@ import * as Material from "@angular/material";
     MatDividerModule,
     MatButtonModule,
     MatMenuModule,
+    MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatDatepickerModule,
+    Material.MatFormFieldModule,
+    Material.MatNativeDateModule,
+    Material.MatInputModule
   ],
-  exports: [Material.MatDialogModule
+  exports: [
+    Material.MatDialogModule,
+    Material.MatFormFieldModule,
+    Material.MatInputModule
   ],
   //entryComponents:[PopUpPlanificationComponent,PopUpEditPoleComponent]
 })

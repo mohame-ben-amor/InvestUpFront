@@ -9,15 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarEntrepreneurComponent implements OnInit {
 
   constructor() { }
-  firstname = "";
-  lastname = "";
+  name = "";
   ngOnInit() {
     this.getCredentials();
   }
-  getCredentials(){
+  getCredentials() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    this.firstname = currentUser["user"]["firstname"];
-    this.lastname=currentUser["user"]["lastname"];
+    this.name = currentUser["user"]["name"];
   }
 
 }

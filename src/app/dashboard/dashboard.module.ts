@@ -16,11 +16,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { InvestorComponent } from './investor/investor.component';
 import { EntrepreneurComponent } from './entrepreneur/entrepreneur.component';
+import { EditProfileComponent } from './investor/edit-profile/edit-profile.component';
+
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import * as Material from "@angular/material";
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 @NgModule({
   declarations: [
     AdminComponent,
     InvestorComponent,
     EntrepreneurComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +44,18 @@ import { EntrepreneurComponent } from './entrepreneur/entrepreneur.component';
     MatDividerModule,
     MatMenuModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Material.MatDialogModule,
+    Material.MatDatepickerModule,
+    Material.MatFormFieldModule,
+    Material.MatNativeDateModule,
+    Material.MatInputModule
+  ],
+  exports: [
+    Material.MatDialogModule,
+    Material.MatFormFieldModule,
+    Material.MatInputModule
   ],
 })
 export class DashboardModule {}

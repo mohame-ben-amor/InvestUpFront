@@ -1,36 +1,34 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { User } from "../models/user";
+import { Project } from "../models/project";
 import { Constants } from "../utils/constants";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserService {
+export class ProjectService {
     constructor(private http: HttpClient) { }
     token = "";
 
-    getAll() {
+    getAllProjects() {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
 
-        return this.http.get<User[]>(Constants.APP_PORT + Constants.USER_ENDPOINT + "/findAll", {
+        return this.http.get<Project[]>(Constants.APP_PORT + "user/project/showall", {
             headers: new HttpHeaders({
                 "Authorization": 'Bearer ' + this.token
-
             })
         })
     }
 
-    getUser(id: number) {
+    getMyProjects(){
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
 
-        return this.http.get<User>(Constants.APP_PORT + `user/getuser/${id}`, {
+        return this.http.get<Project[]>(Constants.APP_PORT + "user/entreoreneur/project/myprojects", {
             headers: new HttpHeaders({
-                "Authorization": 'Bearer ' + this.token,
-                "id": id.toString()
+                "Authorization": 'Bearer ' + this.token
             })
         })
     }

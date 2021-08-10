@@ -1,0 +1,52 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">My projects</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card" *ngFor="let project of projects">
+            <div class="card-header">
+                <h4 class="card-title">{{project.logo}} - <small class="description">{{project.name}}</small></h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <ul role="tablist" class="nav nav-pills nav-pills-rose nav-pills-icons flex-column">
+                            <li class="nav-item"><a data-toggle="tab" href="#link10" role="tablist"
+                                    class="nav-link active"><i class="material-icons">dashboard</i> Description </a>
+                            </li>
+                            <li class="nav-item"><a data-toggle="tab" (click)="getOwner(project.user_id)" href="#link11"
+                                    role="tablist" class="nav-link"><i class="material-icons">assignment_ind</i> Owner
+                                    of project </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content">
+                            <div id="link10" class="tab-pane active"> {{project.description}}
+                                <br>
+                                <div class="alert alert-info"><span>
+                                        <b> Achievement - </b> {{project.achievement}}</span></div>
+                            </div>
+                            <div id="link11" class="tab-pane">
+                                <div class="col-md-12">
+                                    <div class="card card-profile">
+                                        <div class="card-avatar">
+                                            <a>
+                                                <img class="profile_image" src="./assets/images/user/user.png" />
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-category text-gray" *ngIf="user!=null">{{user.adresse}}</h6>
+                                            <h4 class="card-title" *ngIf="user!=null">{{user.name}}</h4>
+                                            <p class="card-description" *ngIf="user!=null">
+                                                {{user.profil}}
+                                            </p>
+                                            <a class="btn btn-danger btn-round">See Profile</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

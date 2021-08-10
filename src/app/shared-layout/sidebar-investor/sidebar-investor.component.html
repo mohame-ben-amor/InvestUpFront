@@ -6,21 +6,21 @@
     </div>
     <mat-divider></mat-divider>
     <div class="user-panel">
-        <img src="../../../assets/images/user/user.png" class="profile_image" alt="User Image" />
+        <img src="./assets/images/user/user.png" class="profile_image" alt="User Image" />
     </div>
     <h2 class="user-name">{{name}}</h2>
     <div class="sidebarr">
       <a [routerLinkActive]="['router-link-active']"
-        routerLink="admin/adduser">
-        <i class="material-icons">people</i><span>All Entrepreneur</span>
+        routerLink="investor/edit-profile">
+        <i class="material-icons">people</i><span>Edit Profil</span>
       </a>
   
-      <a [routerLinkActive]="['router-link-active']" routerLink="admin/addpole">
-        <i class="material-icons">people</i> <span>All Investor</span>
+      <a [routerLinkActive]="['router-link-active']" routerLink="investor/projects">
+        <i class="material-icons">people</i> <span>Projects</span>
       </a>
   
-      <a [routerLinkActive]="['router-link-active']" routerLink="admin/allpoles">
-        <i class="material-icons">location_city</i><span>Projects</span>
+      <a [routerLinkActive]="['router-link-active']" routerLink="investor/discussions">
+        <i class="material-icons">location_city</i><span>Discussions</span>
       </a>
     </div>
   

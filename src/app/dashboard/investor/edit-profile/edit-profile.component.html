@@ -1,0 +1,80 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Edit profile</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div>
+            <div>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <mat-label for="name"> Name <span class="text-danger" *ngIf="form.get('name').errors && 
+                            form.get('name').hasError('required')">*</span></mat-label>
+                        <input matInput type="text" placeholder="Put your name here please" formControlName="name"
+                            value={{name}}>
+                        <mat-error *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+                            Name is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('name').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('name').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label for="profil">Profile <span class="text-danger" *ngIf="form.get('profil').errors && 
+                            form.get('profil').hasError('required')">*</span></mat-label>
+                        <input matInput type="text" placeholder="Put a small description here please"
+                            formControlName="profil" value={{profil}}>
+                        <mat-error *ngIf="form.get('profil').hasError('required') && form.get('profil').touched">
+                            Description is required
+                        </mat-error>
+                        <mat-error *ngIf="form.get('profil').hasError('minlength')">
+                            The minimum length for this field is
+                            {{form.get('profil').errors.minlength.requiredLength}}
+                            characters. </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label for="sexe">Sexe <span class="text-danger" *ngIf="form.get('sexe').errors && 
+                            form.get('sexe').hasError('required')">*</span></mat-label>
+                        <select formControlName="sexe" name="sexe">
+                            <option disabled selected>{{sexe}}</option>
+                            <option *ngFor="let sexeItem of Sexe" [value]="sexeItem">
+                                {{sexeItem}}
+                            </option>
+                        </select>
+                        <mat-error *ngIf="form.get('sexe').hasError('required') && form.get('sexe').touched">
+                            Please choose an option
+                        </mat-error>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-label>Adresse <span class="text-danger" *ngIf="form.get('adresse').errors && 
+                            form.get('adresse').hasError('required')">*</span></mat-label>
+                        <input matInput type='text' placeholder="Put your Adresse here please" formControlName="adresse"
+                            value={{adresse}}>
+                        <mat-error *ngIf="form.get('adresse').touched && form.get('adresse').hasError('required')">
+                            Adresse is required
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Birthday <span class="text-danger" *ngIf="form.get('birthday').errors && 
+                            form.get('birthday').hasError('required')">*</span></mat-label>
+                        <div id="parent">
+                            <mat-datepicker-toggle [for]="deadlineDatePickerStaringDate" matSuffix>
+                            </mat-datepicker-toggle>
+
+                            <input id="datepickerStyle1" matInput placeholder="mm-dd-yyyy" formControlName="birthday"
+                                [matDatepicker]="deadlineDatePickerStaringDate" [value]="birthday.value">
+                            <mat-datepicker #deadlineDatePickerStaringDate></mat-datepicker>
+                        </div>
+                        <mat-error *ngIf="form.get('birthday').touched && form.get('birthday').hasError('required')">
+                            Birthday is required
+                        </mat-error>
+                    </div>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                    <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}</div>
+                    <br>
+                    <button type="submit" mat-flat-button color="primary" class="auth-form-btn">Submit</button>
+                    <button type="button" class="btn btn-danger clear-btn" (click)="onClear()">Clear</button>
+                </form>
+            </div>
+        </div>
+    </div>
