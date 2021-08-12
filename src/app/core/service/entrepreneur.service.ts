@@ -11,6 +11,4 @@ export class EntrepreneurService {
     token: String;
     upper = new UpperCasePipe();
 
-    
-
 }

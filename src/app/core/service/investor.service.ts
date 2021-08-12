@@ -14,14 +14,14 @@ export class InvestorService {
     editName(name: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
-        return this.http.patch(Constants.APP_PORT + `user/editname/${name}`, null, {
+        return this.http.patch(Constants.APP_PORT + "user/edit", { name }, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }
     editAdresse(adresse: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
-        return this.http.patch(Constants.APP_PORT + `user/editadresse/${adresse}`, null, {
+        return this.http.patch(Constants.APP_PORT + "user/edit", { adresse }, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }
@@ -29,7 +29,7 @@ export class InvestorService {
     editProfil(profil: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
-        return this.http.patch(Constants.APP_PORT + `user/editprofil/${profil}`, null, {
+        return this.http.patch(Constants.APP_PORT + "user/edit", { profil }, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }
@@ -37,7 +37,7 @@ export class InvestorService {
     editSexe(sexe: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
-        return this.http.patch(Constants.APP_PORT + `user/editsexe/${sexe}`, null, {
+        return this.http.patch(Constants.APP_PORT + "user/edit", { sexe }, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }
@@ -45,7 +45,7 @@ export class InvestorService {
     editBirthday(birthday: string) {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         this.token = currentUser["token"];
-        return this.http.patch(Constants.APP_PORT + `user/editbirthday/${birthday}`, null, {
+        return this.http.patch(Constants.APP_PORT + "user/edit", { birthday }, {
             headers: new HttpHeaders().set("Authorization", 'Bearer ' + this.token)
         })
     }

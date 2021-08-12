@@ -17,11 +17,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import * as Material from "@angular/material";
+import { MyProjectsComponent } from './my-projects/my-projects.component';
 
 @NgModule({
   declarations: [
 
-  ],
+  MyProjectsComponent],
   imports: [
     CommonModule,
     EntrepreneurRoutingModule,
@@ -39,10 +40,14 @@ import * as Material from "@angular/material";
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    Material.MatDialogModule
+    Material.MatDialogModule,
+    Material.MatDatepickerModule,
+    Material.MatFormFieldModule,
+    Material.MatNativeDateModule,
+    Material.MatInputModule,
   ],
-  exports: [Material.MatDialogModule
-  ],
-  //entryComponents:[PopUpPlanificationComponent,PopUpEditPoleComponent]
+  exports: [Material.MatDialogModule,
+    Material.MatFormFieldModule,
+    Material.MatInputModule],
 })
 export class EntrepreneurModule { }

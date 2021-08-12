@@ -1,0 +1,76 @@
+.page {
+    color: white;
+    padding: 0 1rem;
+    background: #f1f5f9;
+    &__box {
+      min-height: 100px;
+      background: #3f709a;
+      margin: 0 -1rem;
+      font-size: 36px;
+    }
+    &__content {
+      min-height: calc(100vh - 178px);
+      border-radius: 10px;
+      margin-top: -2rem;
+      background: white;
+      color: black;
+      font-size: 15px;
+      &-data {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+}
+input.ng-valid, .ng-valid.required, select.ng-valid{
+  border: 1.5px solid #42A948; /* green */
+}
+
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched{
+  border: 1.5px solid #a94442; /* red */
+}
+mat-label{ 
+  font-size: 20px;
+  font-weight: 600;
+}
+select {
+  width: 100%;
+  padding: 1px 2px;
+  margin: 4px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  height: 30px;
+}
+title{
+  font-size: 30px;
+  font-weight: 600;
+}
+#edit-button-style{
+  border-radius: 50%;
+  border: none;
+  align-items: center;
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  :hover{
+    color: white;
+  }
+}
+#delete-button-style{
+  border-radius: 50%;
+  border: none;
+  align-items: center;
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  :hover{
+    color: white;
+  }
+}
+
+
+#select2 {
+  width: 100px;
+  height: 40px;
+}

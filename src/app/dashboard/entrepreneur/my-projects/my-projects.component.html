@@ -1,0 +1,112 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">My projects</div>
+    <div class="page__content shadow p-3 position-relative">
+        <div class="card" *ngFor="let project of projects">
+            <div class="card-header">
+                <h4 class="card-title">{{project.logo}} - <small class="description">{{project.name}}</small></h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <ul role="tablist" class="nav nav-pills nav-pills-rose nav-pills-icons flex-column">
+                            <li class="nav-item"><a data-toggle="tab" href="#link10" role="tablist"
+                                    class="nav-link active"><i class="material-icons">dashboard</i> Description </a>
+                            </li>
+                            <li class="nav-item"><a data-toggle="tab"
+                                    (click)="getInfo(project.id,project.name,project.description,project.logo,project.achievement)"
+                                    href="#link11" role="tablist" class="nav-link"><i
+                                        class="material-icons">assignment_ind</i> Edit
+                                    project </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content">
+                            <div id="link10" class="tab-pane active"> {{project.description}}
+                                <br>
+                                <div class="alert alert-info"><span>
+                                        <b> Achievement - </b> {{project.achievement}}</span></div>
+                            </div>
+                            <div id="link11" class="tab-pane">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <!--Edit form wiil be there ! -->
+                                        <div class="card-body">
+                                            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                                                <div class="form-group">
+                                                    <mat-label for="name"> Name <span class="text-danger" *ngIf="form.get('name').errors && 
+                                                        form.get('name').hasError('required')">*</span></mat-label>
+                                                    <input matInput type="text" placeholder="Put your name here please"
+                                                        formControlName="name" value={{name}}>
+                                                    <mat-error
+                                                        *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+                                                        Name is required
+                                                    </mat-error>
+                                                    <mat-error *ngIf="form.get('name').hasError('minlength')">
+                                                        The minimum length for this field is
+                                                        {{form.get('name').errors.minlength.requiredLength}}
+                                                        characters. </mat-error>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-label for="description">Description <span class="text-danger"
+                                                            *ngIf="form.get('description').errors && 
+                                                        form.get('description').hasError('required')">*</span>
+                                                    </mat-label>
+                                                    <input matInput type="text"
+                                                        placeholder="Put a small description here please"
+                                                        formControlName="description" value={{description}}>
+                                                    <mat-error
+                                                        *ngIf="form.get('description').hasError('required') && form.get('description').touched">
+                                                        Description is required
+                                                    </mat-error>
+                                                    <mat-error *ngIf="form.get('description').hasError('minlength')">
+                                                        The minimum length for this field is
+                                                        {{form.get('description').errors.minlength.requiredLength}}
+                                                        characters. </mat-error>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-label>Logo <span class="text-danger" *ngIf="form.get('logo').errors && 
+                                                        form.get('logo').hasError('required')">*</span></mat-label>
+                                                    <input matInput type='text' placeholder="Put your logo here please"
+                                                        formControlName="logo" value={{logo}}>
+                                                    <mat-error
+                                                        *ngIf="form.get('logo').touched && form.get('logo').hasError('required')">
+                                                        logo is required
+                                                    </mat-error>
+                                                    <mat-error *ngIf="form.get('logo').hasError('minlength')">
+                                                        The minimum length for this field is
+                                                        {{form.get('logo').errors.minlength.requiredLength}}
+                                                        characters. </mat-error>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-label>Achievement <span class="text-danger" *ngIf="form.get('achievement').errors && 
+                                                        form.get('achievement').hasError('required')">*</span>
+                                                    </mat-label>
+                                                    <input matInput type='text'
+                                                        placeholder="Put your achievement here please"
+                                                        formControlName="achievement" value={{achievement}}>
+                                                    <mat-error
+                                                        *ngIf="form.get('achievement').touched && form.get('achievement').hasError('required')">
+                                                        Achievement is required
+                                                    </mat-error>
+                                                </div>
+
+                                                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                                                <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{success}}
+                                                </div>
+                                                <br>
+                                                <button type="submit" mat-flat-button color="primary"
+                                                    class="auth-form-btn">Submit</button>
+                                                <button type="button" class="btn btn-danger clear-btn"
+                                                    (click)="onClear()">Clear</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

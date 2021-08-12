@@ -65,8 +65,6 @@ export class EditProfileComponent implements OnInit {
     this.success = "";
     console.log(this.user);
 
-
-
     if (this.user.name != "") {
       console.log(this.user);
 
